@@ -1,0 +1,171 @@
+datasource db {
+  provider = "postgresql"
+}
+
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+generator erd {
+  provider = "prisma-erd-generator"
+  output = "./ERD.svg"
+}
+
+enum WorkspaceRole {
+  OWNER
+  MEMBER
+}
+enum CaseStatus {
+  IN_PROGRESS
+  COMPLETED
+  UNBILLED
+  BILLED
+}
+enum BillingCycle {
+  WEEKLY
+  MONTHLY
+  YEARLY
+}
+enum InvoiceStatus {
+  DRAFT
+  SENT
+  PAID
+  OVERDUE
+}
+
+model User {
+  id        Int               @id @default(autoincrement())
+  email     String            @unique
+  password  String?
+  googleId  String?           @unique
+  name      String
+  icon      String?
+  createdAt DateTime          @default(now())
+  updatedAt DateTime          @updatedAt
+  workspace WorkspaceMember[]
+}
+
+model WorkspaceMember {
+  id          Int            @id @default(autoincrement())
+  role        WorkspaceRole  @default(MEMBER)
+  joinedAt    DateTime       @default(now())
+  userId      Int
+  user        User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  workspaceId Int
+  workspace   Workspace      @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  @@unique([userId, workspaceId])
+}
+
+model Workspace {
+  id        Int               @id @default(autoincrement())
+  name      String
+  createdAt DateTime          @default(now())
+  updatedAt DateTime          @updatedAt
+  members   WorkspaceMember[]
+  customers Customer[]
+  contacts  Contact[]
+  cases     Case[]
+  invoices  Invoice[]
+  notes     Note[]
+}
+
+model Customer {
+  id          Int       @id @default(autoincrement())
+  name        String
+  type        String?
+  category    String?
+  website     String?
+  phone       String?
+  description String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  workspaceId Int
+  workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  contacts    Contact[]
+  cases       Case[]
+  invoices    Invoice[]
+  notes       Note[]
+}
+
+model Contact {
+  id          Int       @id @default(autoincrement())
+  lastName    String
+  firstName   String?
+  email       String?
+  phone       String?
+  description String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  workspaceId Int
+  workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  customerId  Int?
+  customer    Customer? @relation(fields: [customerId], references: [id], onDelete: Cascade)
+}
+
+model Case {
+  id             Int       @id @default(autoincrement())
+  name           String
+  category       String?
+  startDate      DateTime
+  finishDate     DateTime?
+  amount         Int
+  status         CaseStatus    @default(IN_PROGRESS)
+  withholdingTax Boolean       @default(false)
+  description    String?
+  isRecurring    Boolean       @default(false)
+  billingCycle   BillingCycle?
+  nextBillingDate DateTime?
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+  workspaceId    Int
+  workspace      Workspace     @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  customerId     Int
+  customer       Customer      @relation(fields: [customerId], references: [id], onDelete: Cascade)
+  invoice        Invoice[]
+}
+
+model Invoice {
+  id             Int      @id @default(autoincrement())
+  number         String
+  subtotal       Int
+  tax            Int
+  withholdingTax Int      @default(0)
+  total          Int
+  date           DateTime
+  dueDate        DateTime
+  status         InvoiceStatus?
+  description    String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  workspaceId    Int
+  workspace      Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  customerId     Int
+  customer       Customer  @relation(fields: [customerId], references: [id], onDelete: Cascade)
+  caseId         Int
+  case           Case     @relation(fields: [caseId], references: [id], onDelete: Cascade)
+  lineItems      LineItem[]
+}
+
+model LineItem {
+  id          Int      @id @default(autoincrement())
+  name        String
+  amount      Int
+  quantity    Int      @default(1)
+  taxRate     Int      @default(10)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  invoiceId   Int
+  invoice     Invoice  @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
+}
+
+model Note {
+  id          Int      @id @default(autoincrement())
+  content     String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  workspaceId Int
+  workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  customerId  Int?
+  customer    Customer? @relation(fields: [customerId], references: [id], onDelete: Cascade)
+}

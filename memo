@@ -1,0 +1,309 @@
+認証
+POST /api/auth/register
+{
+  "name": "田中太郎",
+  "email": "test@test.com",
+  "password": "password123"
+}
+
+POST /api/auth/login
+{
+  "email": "test@test.com",
+  "password": "password123"
+}
+
+以下全部 Authorization: Bearer {token} が必要
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Mywid29ya3NwYWNlSWQiOjMsImlhdCI6MTc3NDg1OTA4MSwiZXhwIjoxNzc1NDYzODgxfQ.D8luOzPPEwDxyelGL4-OejeWZlBGipE-bEF9TOJZaV4
+
+アカウント
+GET /api/accounts
+{
+    "id": 3,
+    "email": "test@test.com",
+    "password": "$2b$10$as.LOKg8KzXJ00VW.qS.o.GMUQrMXVqIBJwoDqq6gmnBBt1rCUaUG",
+    "googleId": null,
+    "name": "田中太郎",
+    "icon": null,
+    "createdAt": "2026-03-30T08:24:29.823Z",
+    "updatedAt": "2026-03-30T08:24:29.823Z"
+}
+
+PATCH /api/accounts
+{
+  "name": "massango",
+  "email": "massangoda@massango.jp",
+  "icon": "icon_url"
+}
+
+{
+    "id": 3,
+    "email": "massangoda@massango.jp",
+    "password": "$2b$10$as.LOKg8KzXJ00VW.qS.o.GMUQrMXVqIBJwoDqq6gmnBBt1rCUaUG",
+    "googleId": null,
+    "name": "massango",
+    "icon": "icon_url",
+    "createdAt": "2026-03-30T08:24:29.823Z",
+    "updatedAt": "2026-03-30T08:28:25.681Z"
+}
+
+DELETE /api/accounts
+
+PATCH /api/accounts/password
+{
+  "currentPassword": "password123",
+  "newPassword": "newpassword123"
+}
+
+{
+    "id": 3,
+    "email": "massangoda@massango.jp",
+    "password": "$2b$10$kZowBsbI98E4EgAGvQDAOeaXPi7gtm0BSY46En5r4XJRM9GucmPmy",
+    "googleId": null,
+    "name": "massango",
+    "icon": "icon_url",
+    "createdAt": "2026-03-30T08:24:29.823Z",
+    "updatedAt": "2026-03-30T08:29:23.908Z"
+}
+
+POST /api/accounts/google
+{
+  "googleId": "YEAH_RIGHT"
+}
+
+{
+    "id": 3,
+    "email": "massangoda@massango.jp",
+    "password": "$2b$10$kZowBsbI98E4EgAGvQDAOeaXPi7gtm0BSY46En5r4XJRM9GucmPmy",
+    "googleId": "YEAH_RIGHT",
+    "name": "massango",
+    "icon": "icon_url",
+    "createdAt": "2026-03-30T08:24:29.823Z",
+    "updatedAt": "2026-03-30T08:29:53.534Z"
+}
+
+DELETE /api/accounts/google
+
+{
+    "id": 3,
+    "email": "massangoda@massango.jp",
+    "password": "$2b$10$kZowBsbI98E4EgAGvQDAOeaXPi7gtm0BSY46En5r4XJRM9GucmPmy",
+    "googleId": null,
+    "name": "massango",
+    "icon": "icon_url",
+    "createdAt": "2026-03-30T08:24:29.823Z",
+    "updatedAt": "2026-03-30T08:30:10.540Z"
+}
+
+ワークスペース
+POST /api/workspaces
+{
+  "name": "ワークスペース名"
+}
+
+{
+    "id": 4,
+    "name": "ワークスペース名",
+    "createdAt": "2026-03-30T08:30:38.188Z",
+    "updatedAt": "2026-03-30T08:30:38.188Z"
+}
+
+GET /api/workspaces
+
+[
+    {
+        "id": 3,
+        "name": "田中太郎 のワークスペース",
+        "createdAt": "2026-03-30T08:24:29.823Z",
+        "updatedAt": "2026-03-30T08:24:29.823Z"
+    },
+    {
+        "id": 4,
+        "name": "ワークスペース名",
+        "createdAt": "2026-03-30T08:30:38.188Z",
+        "updatedAt": "2026-03-30T08:30:38.188Z"
+    }
+]
+
+GET /api/workspaces/{id}
+
+{
+    "id": 3,
+    "name": "田中太郎 のワークスペース",
+    "createdAt": "2026-03-30T08:24:29.823Z",
+    "updatedAt": "2026-03-30T08:24:29.823Z"
+}
+
+PATCH /api/workspaces/{id}
+{
+  "name": "MASSANGO1のワークスペース"
+}
+
+{
+    "id": 3,
+    "name": "MASSANGO1のワークスペース",
+    "createdAt": "2026-03-30T08:24:29.823Z",
+    "updatedAt": "2026-03-30T08:31:37.353Z"
+}
+
+
+DELETE /api/workspaces/{id}
+
+{
+    "message": "OWNERのみ実行できます"
+}
+
+GET /api/workspaces/{id}/members
+
+POST /api/workspaces/{id}/members
+{
+  "email": "member@test.com",
+  "role": "MEMBER"
+}
+
+PATCH /api/workspaces/{id}/members/{targetUserId}
+{
+  "role": "OWNER"
+}
+
+DELETE /api/workspaces/{id}/members/{targetUserId}
+
+顧客
+POST /api/customers
+{
+  "name": "株式会社テスト",
+  "type": "法人",
+  "category": "IT",
+  "website": "https://test.com",
+  "phone": "03-0000-0000",
+  "description": "テスト顧客"
+}
+
+GET /api/customers
+
+GET /api/customers/{id}
+
+PATCH /api/customers/{id}
+{
+  "name": "新しい会社名"
+}
+
+DELETE /api/customers/{id}
+
+連絡先
+POST /api/contacts
+{
+  "lastName": "田中",
+  "firstName": "太郎",
+  "email": "tanaka@test.com",
+  "phone": "090-0000-0000",
+  "description": "メモ",
+  "customerId": 1
+}
+
+GET /api/contacts
+GET /api/contacts?customerId={id}
+
+GET /api/contacts/{id}
+
+PATCH /api/contacts/{id}
+{
+  "lastName": "新しい名前"
+}
+
+DELETE /api/contacts/{id}
+
+案件
+POST /api/cases
+{
+  "name": "Webサイト制作",
+  "category": "デザイン",
+  "startDate": "2024-01-01T00:00:00.000Z",
+  "finishDate": "2024-03-31T00:00:00.000Z",
+  "amount": 100000,
+  "status": "IN_PROGRESS",
+  "withholdingTax": false,
+  "description": "説明",
+  "isRecurring": false,
+  "customerId": 1
+}
+
+GET /api/cases
+GET /api/cases?customerId={id}
+
+GET /api/cases/{id}
+
+PATCH /api/cases/{id}
+{
+  "name": "新しい案件名",
+  "status": "COMPLETED"
+}
+
+DELETE /api/cases/{id}
+
+請求書
+POST /api/invoices
+{
+  "number": "INV-001",
+  "subtotal": 100000,
+  "tax": 10000,
+  "withholdingTax": 0,
+  "total": 110000,
+  "date": "2024-01-01T00:00:00.000Z",
+  "dueDate": "2024-01-31T00:00:00.000Z",
+  "status": "DRAFT",
+  "description": "説明",
+  "caseId": 1
+}
+
+GET /api/invoices
+GET /api/invoices?caseId={id}
+
+GET /api/invoices/{id}
+
+PATCH /api/invoices/{id}
+{
+  "status": "SENT"
+}
+
+DELETE /api/invoices/{id}
+
+明細行
+POST /api/line-items
+{
+  "name": "Webデザイン",
+  "amount": 100000,
+  "quantity": 1,
+  "taxRate": 10,
+  "invoiceId": 1
+}
+
+GET /api/line-items?invoiceId={id}
+
+GET /api/line-items/{id}
+
+PATCH /api/line-items/{id}
+{
+  "name": "新しい品目名",
+  "amount": 50000
+}
+
+DELETE /api/line-items/{id}
+
+メモ
+POST /api/notes
+{
+  "content": "メモの内容",
+  "customerId": 1
+}
+
+GET /api/notes
+GET /api/notes?customerId={id}
+
+GET /api/notes/{id}
+
+PATCH /api/notes/{id}
+{
+  "content": "新しいメモ"
+}
+
+DELETE /api/notes/{id}
