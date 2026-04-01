@@ -3,7 +3,8 @@ export default defineNuxtConfig({
   modules: [
     '@nuxt/eslint',
     '@nuxt/ui',
-    '@vueuse/nuxt'
+    '@vueuse/nuxt',
+    'nuxt-toast'
   ],
 
   devtools: {
@@ -13,8 +14,9 @@ export default defineNuxtConfig({
   css: ['~/assets/css/main.css'],
 
   routeRules: {
-    '/api/**': {
-      cors: true
+    '/backend/**': {
+      cors: true,
+      proxy: 'http://localhost:5000/api/**',
     }
   },
 

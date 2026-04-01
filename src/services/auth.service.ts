@@ -49,7 +49,7 @@ export const registerService = async (input: RegisterInput) => {
         { expiresIn: '7d' }
     )
 
-    return token
+    return { token }
 }
 
 export const loginService = async (input: LoginInput) => {
@@ -85,5 +85,11 @@ export const loginService = async (input: LoginInput) => {
         { expiresIn: '7d' }
     )
 
-    return token
+    return { token }
+}
+
+export const verifyTokenService = async (token: string) => {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY as string) as { id: number, workspaceId: number }
+
+    return decoded
 }

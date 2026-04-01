@@ -11,7 +11,6 @@
         </template>
 
         <template #right>
-          <CustomersAddModal />
         </template>
       </UDashboardNavbar>
     </template>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {type RegisterInput, RegisterSchema} from "~/schemas/auth.validation";
+import {LoginSchema, type LoginInput} from "~/schemas/auth.validation";
 import type {AuthFormField} from "@nuxt/ui/components/AuthForm.vue";
 import type {FormSubmitEvent} from "@nuxt/ui";
 
@@ -8,15 +8,9 @@ definePageMeta({
 })
 
 const toast = useToast()
-const { register } = useAuth()
+const { login } = useAuth()
 
 const fields: AuthFormField[] = [{
-  name: "name",
-  type: "text",
-  label: "Name",
-  placeholder: "Mass Angoh",
-  required: true
-}, {
   name: "email",
   type: "email",
   label: "Email",
@@ -34,12 +28,11 @@ const providers = [{
   icon: "i-simple-icons-google"
 }]
 
-async function onSubmit(payload: FormSubmitEvent<RegisterInput>) {
+async function onSubmit(payload: FormSubmitEvent<LoginInput>) {
   try{
-    await register(payload.data)
-    toast.success({ title: "Register successfully", message: "Register successfully" })
+    await login(payload.data)
   } catch (err: any) {
-    toast.error({ title: "Register failed", message: err.message || "Register failed" })
+    toast.error({ title: "Login failed", message: err.message || "Login failed" })
   }
 }
 </script>
@@ -48,15 +41,16 @@ async function onSubmit(payload: FormSubmitEvent<RegisterInput>) {
   <div class="flex flex-col items-center justify-center gap-4 p-4">
     <UPageCard class="w-full max-w-md">
       <UAuthForm
-        :schema="RegisterSchema"
-        title="Create an account"
-        description="Create a account"
+        :schema="LoginSchema"
+        title="Login"
+        description="アカウントにアクセスするには、認証情報を入力してください。"
         icon="i-lucide-user-plus"
         :fields="fields"
         :providers="providers"
         @submit="onSubmit"
       >
       </UAuthForm>
+      <NuxtLink to="/register">アカウントを作成</NuxtLink>
     </UPageCard>
   </div>
 </template>
