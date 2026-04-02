@@ -57,6 +57,7 @@ async function onSubmit(payload: FormSubmitEvent<RegisterInput>) {
         @submit="onSubmit"
       >
       </UAuthForm>
+      <NuxtLink to="/login">ログイン</NuxtLink>
     </UPageCard>
   </div>
 </template>

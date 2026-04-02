@@ -6,7 +6,7 @@ export const useAuth = () => {
 
   const register = async (data: RegisterInput) => {
     try {
-      const result = await api<{ token: string}>('/auth/register', {
+      const result = await api<{ token: string }>('/auth/register', {
         method: 'POST',
         body: data
       })
@@ -19,7 +19,7 @@ export const useAuth = () => {
 
   const login = async (data: LoginInput) => {
     try {
-      const result = await api<{ token: string}>('/auth/login', {
+      const result = await api<{ token: string }>('/auth/login', {
         method: 'POST',
         body: data
       })
