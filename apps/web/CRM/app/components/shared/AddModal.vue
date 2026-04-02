@@ -2,33 +2,34 @@
 import * as z from 'zod'
 import type { FormSubmitEvent } from '@nuxt/ui'
 
-const schema = z.object({
-  name: z.string().min(2, 'Too short'),
-  email: z.string().email('Invalid email')
-})
+const props = defineProps<{
+  buttonLabel: string,
+  buttonIcon?: string,
+  modalTitle?: string,
+  modalDescription?: string,
+  schema: z.ZodTypeAny,
+}>()
+const emit = defineEmits<{
+  (e: "submit", data: any): void
+}>()
+
 const open = ref(false)
 
-type Schema = z.output<typeof schema>
+const state = reactive<Record<string, any>>({})
 
-const state = reactive<Partial<Schema>>({
-  name: '',
-  email: ''
-})
-
-const toast = useToast()
-async function onSubmit(event: FormSubmitEvent<Schema>) {
-  toast.add({ title: 'Success', description: `New customer ${event.data.name} added`, color: 'success' })
+async function onSubmit(event: FormSubmitEvent<unknown>) {
+  emit('submit', event.data)
   open.value = false
 }
 </script>
 
 <template>
-  <UModal fullscreen v-model:open="open" title="New customer" description="Add a new customer to the database" :ui="{ content: 'm-6 rounded-lg' }">
-    <UButton label="New customer" icon="i-lucide-plus" />
+  <UModal fullscreen v-model:open="open" :title="props.buttonLabel ?? props.modalTitle" :description="props.modalDescription" :ui="{ content: 'm-20 rounded-lg' }">
+    <UButton :label="props.buttonLabel" :icon="props.buttonIcon ?? 'i-lucide-plus'" class="rounded-full" />
 
     <template #body>
       <UForm
-        :schema="schema"
+        :schema="props.schema"
         :state="state"
         class="space-y-4"
         @submit="onSubmit"

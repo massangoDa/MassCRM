@@ -1,9 +1,15 @@
 <script setup lang="ts">
-
 import AddModal from "~/components/shared/AddModal.vue";
+import {type CreateCustomerInput, CreateCustomerSchema} from "~/schemas/customer.validation";
 
-async function createCustomer() {
+const toast = useToast()
 
+async function handleCreateCustomer(data: CreateCustomerInput) {
+  try {
+    await useCustomers().createCustomer(data)
+  } catch (err: any) {
+    toast.error({ title: "顧客の追加に失敗", message: err.message })
+  }
 }
 </script>
 
@@ -16,8 +22,12 @@ async function createCustomer() {
         </template>
 
         <template #right>
-          <UButton icon="i-lucide-plus" size="md" class="rounded-full" @click="createCustomer">顧客を追加</UButton>
-          <AddModal />
+          <AddModal
+            button-label="顧客を追加"
+            modal-description="顧客を追加するためのフォームを入力してください"
+            :schema="CreateCustomerSchema"
+            @submit="handleCreateCustomer"
+          />
         </template>
       </UDashboardNavbar>
     </template>
