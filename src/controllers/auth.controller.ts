@@ -32,6 +32,14 @@ export const loginController = async (req: Request, res: Response) => {
         return res.status(200).json(token)
     } catch (err) {
         if (err instanceof Error) {
+            if (
+                err.message === 'ユーザーが存在しません' ||
+                err.message === 'このアカウントはパスワードでログインできません' ||
+                err.message === 'パスワードが正しくありません' ||
+                err.message === 'ワークスペースが存在しません'
+            ) {
+                return res.status(401).json({ message: 'メールアドレスまたはパスワードが正しくありません' })
+            }
             return res.status(500).json({ message: err.message })
         }
         return res.status(500).json({ message: "サーバーエラー" })

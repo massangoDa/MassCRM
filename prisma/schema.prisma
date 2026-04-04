@@ -9,24 +9,27 @@ generator client {
 
 generator erd {
   provider = "prisma-erd-generator"
-  output = "./ERD.svg"
+  output   = "./ERD.svg"
 }
 
 enum WorkspaceRole {
   OWNER
   MEMBER
 }
+
 enum CaseStatus {
   IN_PROGRESS
   COMPLETED
   UNBILLED
   BILLED
 }
+
 enum BillingCycle {
   WEEKLY
   MONTHLY
   YEARLY
 }
+
 enum InvoiceStatus {
   DRAFT
   SENT
@@ -47,13 +50,14 @@ model User {
 }
 
 model WorkspaceMember {
-  id          Int            @id @default(autoincrement())
-  role        WorkspaceRole  @default(MEMBER)
-  joinedAt    DateTime       @default(now())
+  id          Int           @id @default(autoincrement())
+  role        WorkspaceRole @default(MEMBER)
+  joinedAt    DateTime      @default(now())
   userId      Int
-  user        User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user        User          @relation(fields: [userId], references: [id], onDelete: Cascade)
   workspaceId Int
-  workspace   Workspace      @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  workspace   Workspace     @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+
   @@unique([userId, workspaceId])
 }
 
@@ -73,10 +77,12 @@ model Workspace {
 model Customer {
   id          Int       @id @default(autoincrement())
   name        String
-  type        String?
   category    String?
-  website     String?
+  status      String?
+  email       String?
   phone       String?
+  address     String?
+  website     String?
   description String?
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
@@ -104,66 +110,66 @@ model Contact {
 }
 
 model Case {
-  id             Int       @id @default(autoincrement())
-  name           String
-  category       String?
-  startDate      DateTime
-  finishDate     DateTime?
-  amount         Int
-  status         CaseStatus    @default(IN_PROGRESS)
-  withholdingTax Boolean       @default(false)
-  description    String?
-  isRecurring    Boolean       @default(false)
-  billingCycle   BillingCycle?
+  id              Int           @id @default(autoincrement())
+  name            String
+  category        String?
+  startDate       DateTime
+  finishDate      DateTime?
+  amount          Int
+  status          CaseStatus    @default(IN_PROGRESS)
+  withholdingTax  Boolean       @default(false)
+  description     String?
+  isRecurring     Boolean       @default(false)
+  billingCycle    BillingCycle?
   nextBillingDate DateTime?
-  createdAt      DateTime      @default(now())
-  updatedAt      DateTime      @updatedAt
-  workspaceId    Int
-  workspace      Workspace     @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
-  customerId     Int
-  customer       Customer      @relation(fields: [customerId], references: [id], onDelete: Cascade)
-  invoice        Invoice[]
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+  workspaceId     Int
+  workspace       Workspace     @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  customerId      Int
+  customer        Customer      @relation(fields: [customerId], references: [id], onDelete: Cascade)
+  invoice         Invoice[]
 }
 
 model Invoice {
-  id             Int      @id @default(autoincrement())
+  id             Int            @id @default(autoincrement())
   number         String
   subtotal       Int
   tax            Int
-  withholdingTax Int      @default(0)
+  withholdingTax Int            @default(0)
   total          Int
   date           DateTime
   dueDate        DateTime
   status         InvoiceStatus?
   description    String?
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
   workspaceId    Int
-  workspace      Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  workspace      Workspace      @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
   customerId     Int
-  customer       Customer  @relation(fields: [customerId], references: [id], onDelete: Cascade)
+  customer       Customer       @relation(fields: [customerId], references: [id], onDelete: Cascade)
   caseId         Int
-  case           Case     @relation(fields: [caseId], references: [id], onDelete: Cascade)
+  case           Case           @relation(fields: [caseId], references: [id], onDelete: Cascade)
   lineItems      LineItem[]
 }
 
 model LineItem {
-  id          Int      @id @default(autoincrement())
-  name        String
-  amount      Int
-  quantity    Int      @default(1)
-  taxRate     Int      @default(10)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  invoiceId   Int
-  invoice     Invoice  @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
+  id        Int      @id @default(autoincrement())
+  name      String
+  amount    Int
+  quantity  Int      @default(1)
+  taxRate   Int      @default(10)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  invoiceId Int
+  invoice   Invoice  @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
 }
 
 model Note {
-  id          Int      @id @default(autoincrement())
+  id          Int       @id @default(autoincrement())
   content     String
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
   workspaceId Int
   workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
   customerId  Int?

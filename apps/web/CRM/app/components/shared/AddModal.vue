@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import * as z from 'zod'
-import type { FormSubmitEvent } from '@nuxt/ui'
+import type {FormSubmitEvent} from '@nuxt/ui'
+import type {FormType} from "~/schemas/form.validation";
 
 const props = defineProps<{
   buttonLabel: string,
@@ -8,14 +9,38 @@ const props = defineProps<{
   modalTitle?: string,
   modalDescription?: string,
   schema: z.ZodTypeAny,
+  forms: FormType[]
 }>()
 const emit = defineEmits<{
   (e: "submit", data: any): void
 }>()
 
 const open = ref(false)
-
 const state = reactive<Record<string, any>>({})
+
+watchEffect(() => {
+  for (const f of props.forms) {
+    if (f.name in state) continue
+    state[f.name] = f.type === 'number' ? null : ''
+  }
+})
+
+function inputType(field: FormType) {
+  switch (field.type) {
+    case 'text':
+      return 'text'
+    case 'number':
+      return 'number'
+    case 'phone':
+      return 'tel'
+    case 'website':
+      return 'url'
+    case 'email':
+      return 'email'
+    default:
+      return 'text'
+  }
+}
 
 async function onSubmit(event: FormSubmitEvent<unknown>) {
   emit('submit', event.data)
@@ -34,17 +59,44 @@ async function onSubmit(event: FormSubmitEvent<unknown>) {
         class="space-y-4"
         @submit="onSubmit"
       >
-        <UFormField label="Name" placeholder="John Doe" name="name">
-          <UInput v-model="state.name" class="w-full" />
-        </UFormField>
-        <UFormField label="Email" placeholder="john.doe@example.com" name="email">
-          <UInput v-model="state.email" class="w-full" />
-        </UFormField>
+        <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+          <UFormField
+            v-for="field in props.forms"
+            :key="field.name"
+            :label="field.label"
+            :name="field.name"
+            :required="field.required"
+            :class="{ 'md:col-span-2': field.type === 'textarea' }"
+          >
+            <UTextarea
+              v-if="field.type === 'textarea'"
+              v-model="state[field.name]"
+              class="w-full"
+              :type="inputType(field)"
+              :placeholder="field.placeholder"
+            />
+            <USelectMenu
+              v-else-if="field.type === 'select'"
+              v-model="state[field.name]"
+              class="w-full"
+              :items="field.options"
+            />
+            <UInput
+              v-else
+              v-model="state[field.name]"
+              class="w-full"
+              :type="inputType(field)"
+              :placeholder="field.placeholder"
+            />
+          </UFormField>
+        </div>
+
         <div class="flex justify-end gap-2">
           <UButton
             label="Cancel"
             color="neutral"
             variant="subtle"
+            type="button"
             @click="open = false"
           />
           <UButton
