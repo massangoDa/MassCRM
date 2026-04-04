@@ -5,7 +5,9 @@ export const useApi = () => {
     baseURL: '/backend',
     onRequest({ options }) {
       options.headers = new Headers(options.headers)
-      options.headers.set("Authorization", `Bearer ${token.value}`)
+      if (token.value) {
+        options.headers.set("Authorization", `Bearer ${token.value}`)
+      }
     }
   })
 }

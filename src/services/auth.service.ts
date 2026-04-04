@@ -89,7 +89,6 @@ export const loginService = async (input: LoginInput) => {
 }
 
 export const verifyTokenService = async (token: string) => {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY as string) as { id: number, workspaceId: number }
-
-    return decoded
+    const secretKey = process.env.JWT_SECRET_KEY || 'test'
+    return jwt.verify(token, secretKey) as { id: number, workspaceId: number }
 }

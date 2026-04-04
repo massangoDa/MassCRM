@@ -11,7 +11,8 @@ export const authenticateToken = async (req: Request, res: Response, next: NextF
             return res.status(401).json({ message: '認証が必要' })
         }
 
-        const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY as string) as { id: number, workspaceId: number }
+        const secretKey = process.env.JWT_SECRET_KEY || 'test'
+        const decoded = jwt.verify(token, secretKey) as { id: number, workspaceId: number }
 
         const member = await prisma.workspaceMember.findFirst({
             where: {
