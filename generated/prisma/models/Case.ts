@@ -281,7 +281,7 @@ export type CaseGroupByOutputType = {
   _max: CaseMaxAggregateOutputType | null
 }
 
-type GetCaseGroupByPayload<T extends CaseGroupByArgs> = Prisma.PrismaPromise<
+export type GetCaseGroupByPayload<T extends CaseGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<CaseGroupByOutputType, T['by']> &
       {

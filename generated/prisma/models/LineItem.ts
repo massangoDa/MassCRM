@@ -229,7 +229,7 @@ export type LineItemGroupByOutputType = {
   _max: LineItemMaxAggregateOutputType | null
 }
 
-type GetLineItemGroupByPayload<T extends LineItemGroupByArgs> = Prisma.PrismaPromise<
+export type GetLineItemGroupByPayload<T extends LineItemGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<LineItemGroupByOutputType, T['by']> &
       {

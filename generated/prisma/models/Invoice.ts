@@ -290,7 +290,7 @@ export type InvoiceGroupByOutputType = {
   _max: InvoiceMaxAggregateOutputType | null
 }
 
-type GetInvoiceGroupByPayload<T extends InvoiceGroupByArgs> = Prisma.PrismaPromise<
+export type GetInvoiceGroupByPayload<T extends InvoiceGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<InvoiceGroupByOutputType, T['by']> &
       {

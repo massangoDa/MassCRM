@@ -1,7 +1,7 @@
 import {prisma} from "../lib/prisma";
 import {ConnectGoogleInput, UpdateAccountInput, UpdatePasswordInput} from "../validations/account.validation";
 import bcrypt from "bcrypt";
-import {WorkspaceRole} from "@prisma/client";
+import {WorkspaceRole} from "../../generated/prisma/enums";
 
 export const getAccountService = async (id: number) => {
     const result = await prisma.user.findUnique({
