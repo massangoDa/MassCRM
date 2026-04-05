@@ -22,7 +22,7 @@ export const createLineItemService = async (input: CreateLineItemInput) => {
     return result
 }
 
-export const getLineItemsService = async (invoiceId: number) => {
+export const getLineItemsService = async (invoiceId: string) => {
     const result = await prisma.lineItem.findMany({
         where: {
             invoiceId
@@ -32,7 +32,7 @@ export const getLineItemsService = async (invoiceId: number) => {
     return result
 }
 
-export const getLineItemService = async (id: number) => {
+export const getLineItemService = async (id: string) => {
     const result = await prisma.lineItem.findUnique({
         where: {
             id
@@ -42,7 +42,7 @@ export const getLineItemService = async (id: number) => {
     return result
 }
 
-export const updateLineItemService = async (input: UpdateLineItemInput, id: number) => {
+export const updateLineItemService = async (input: UpdateLineItemInput, id: string) => {
     const lineItem = await prisma.lineItem.findUnique({
         where: {
             id
@@ -68,7 +68,7 @@ export const updateLineItemService = async (input: UpdateLineItemInput, id: numb
     return result
 }
 
-export const deleteLineItemService = async (id: number) => {
+export const deleteLineItemService = async (id: string) => {
     const lineItem = await prisma.lineItem.findUnique({
         where: {
             id

@@ -20,29 +20,19 @@ export type WorkspaceModel = runtime.Types.Result.DefaultSelection<Prisma.$Works
 
 export type AggregateWorkspace = {
   _count: WorkspaceCountAggregateOutputType | null
-  _avg: WorkspaceAvgAggregateOutputType | null
-  _sum: WorkspaceSumAggregateOutputType | null
   _min: WorkspaceMinAggregateOutputType | null
   _max: WorkspaceMaxAggregateOutputType | null
 }
 
-export type WorkspaceAvgAggregateOutputType = {
-  id: number | null
-}
-
-export type WorkspaceSumAggregateOutputType = {
-  id: number | null
-}
-
 export type WorkspaceMinAggregateOutputType = {
-  id: number | null
+  id: string | null
   name: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
 
 export type WorkspaceMaxAggregateOutputType = {
-  id: number | null
+  id: string | null
   name: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -56,14 +46,6 @@ export type WorkspaceCountAggregateOutputType = {
   _all: number
 }
 
-
-export type WorkspaceAvgAggregateInputType = {
-  id?: true
-}
-
-export type WorkspaceSumAggregateInputType = {
-  id?: true
-}
 
 export type WorkspaceMinAggregateInputType = {
   id?: true
@@ -125,18 +107,6 @@ export type WorkspaceAggregateArgs<ExtArgs extends runtime.Types.Extensions.Inte
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
-   * Select which fields to average
-  **/
-  _avg?: WorkspaceAvgAggregateInputType
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-   * 
-   * Select which fields to sum
-  **/
-  _sum?: WorkspaceSumAggregateInputType
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-   * 
    * Select which fields to find the minimum value
   **/
   _min?: WorkspaceMinAggregateInputType
@@ -167,20 +137,16 @@ export type WorkspaceGroupByArgs<ExtArgs extends runtime.Types.Extensions.Intern
   take?: number
   skip?: number
   _count?: WorkspaceCountAggregateInputType | true
-  _avg?: WorkspaceAvgAggregateInputType
-  _sum?: WorkspaceSumAggregateInputType
   _min?: WorkspaceMinAggregateInputType
   _max?: WorkspaceMaxAggregateInputType
 }
 
 export type WorkspaceGroupByOutputType = {
-  id: number
+  id: string
   name: string
   createdAt: Date
   updatedAt: Date
   _count: WorkspaceCountAggregateOutputType | null
-  _avg: WorkspaceAvgAggregateOutputType | null
-  _sum: WorkspaceSumAggregateOutputType | null
   _min: WorkspaceMinAggregateOutputType | null
   _max: WorkspaceMaxAggregateOutputType | null
 }
@@ -204,7 +170,7 @@ export type WorkspaceWhereInput = {
   AND?: Prisma.WorkspaceWhereInput | Prisma.WorkspaceWhereInput[]
   OR?: Prisma.WorkspaceWhereInput[]
   NOT?: Prisma.WorkspaceWhereInput | Prisma.WorkspaceWhereInput[]
-  id?: Prisma.IntFilter<"Workspace"> | number
+  id?: Prisma.StringFilter<"Workspace"> | string
   name?: Prisma.StringFilter<"Workspace"> | string
   createdAt?: Prisma.DateTimeFilter<"Workspace"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Workspace"> | Date | string
@@ -230,7 +196,7 @@ export type WorkspaceOrderByWithRelationInput = {
 }
 
 export type WorkspaceWhereUniqueInput = Prisma.AtLeast<{
-  id?: number
+  id?: string
   AND?: Prisma.WorkspaceWhereInput | Prisma.WorkspaceWhereInput[]
   OR?: Prisma.WorkspaceWhereInput[]
   NOT?: Prisma.WorkspaceWhereInput | Prisma.WorkspaceWhereInput[]
@@ -251,23 +217,22 @@ export type WorkspaceOrderByWithAggregationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.WorkspaceCountOrderByAggregateInput
-  _avg?: Prisma.WorkspaceAvgOrderByAggregateInput
   _max?: Prisma.WorkspaceMaxOrderByAggregateInput
   _min?: Prisma.WorkspaceMinOrderByAggregateInput
-  _sum?: Prisma.WorkspaceSumOrderByAggregateInput
 }
 
 export type WorkspaceScalarWhereWithAggregatesInput = {
   AND?: Prisma.WorkspaceScalarWhereWithAggregatesInput | Prisma.WorkspaceScalarWhereWithAggregatesInput[]
   OR?: Prisma.WorkspaceScalarWhereWithAggregatesInput[]
   NOT?: Prisma.WorkspaceScalarWhereWithAggregatesInput | Prisma.WorkspaceScalarWhereWithAggregatesInput[]
-  id?: Prisma.IntWithAggregatesFilter<"Workspace"> | number
+  id?: Prisma.StringWithAggregatesFilter<"Workspace"> | string
   name?: Prisma.StringWithAggregatesFilter<"Workspace"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Workspace"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Workspace"> | Date | string
 }
 
 export type WorkspaceCreateInput = {
+  id?: string
   name: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -280,7 +245,7 @@ export type WorkspaceCreateInput = {
 }
 
 export type WorkspaceUncheckedCreateInput = {
-  id?: number
+  id?: string
   name: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -293,6 +258,7 @@ export type WorkspaceUncheckedCreateInput = {
 }
 
 export type WorkspaceUpdateInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -305,7 +271,7 @@ export type WorkspaceUpdateInput = {
 }
 
 export type WorkspaceUncheckedUpdateInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -318,20 +284,21 @@ export type WorkspaceUncheckedUpdateInput = {
 }
 
 export type WorkspaceCreateManyInput = {
-  id?: number
+  id?: string
   name: string
   createdAt?: Date | string
   updatedAt?: Date | string
 }
 
 export type WorkspaceUpdateManyMutationInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type WorkspaceUncheckedUpdateManyInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -349,10 +316,6 @@ export type WorkspaceCountOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
 }
 
-export type WorkspaceAvgOrderByAggregateInput = {
-  id?: Prisma.SortOrder
-}
-
 export type WorkspaceMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
@@ -365,10 +328,6 @@ export type WorkspaceMinOrderByAggregateInput = {
   name?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-}
-
-export type WorkspaceSumOrderByAggregateInput = {
-  id?: Prisma.SortOrder
 }
 
 export type WorkspaceCreateNestedOneWithoutMembersInput = {
@@ -456,6 +415,7 @@ export type WorkspaceUpdateOneRequiredWithoutNotesNestedInput = {
 }
 
 export type WorkspaceCreateWithoutMembersInput = {
+  id?: string
   name: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -467,7 +427,7 @@ export type WorkspaceCreateWithoutMembersInput = {
 }
 
 export type WorkspaceUncheckedCreateWithoutMembersInput = {
-  id?: number
+  id?: string
   name: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -495,6 +455,7 @@ export type WorkspaceUpdateToOneWithWhereWithoutMembersInput = {
 }
 
 export type WorkspaceUpdateWithoutMembersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -506,7 +467,7 @@ export type WorkspaceUpdateWithoutMembersInput = {
 }
 
 export type WorkspaceUncheckedUpdateWithoutMembersInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -518,6 +479,7 @@ export type WorkspaceUncheckedUpdateWithoutMembersInput = {
 }
 
 export type WorkspaceCreateWithoutCustomersInput = {
+  id?: string
   name: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -529,7 +491,7 @@ export type WorkspaceCreateWithoutCustomersInput = {
 }
 
 export type WorkspaceUncheckedCreateWithoutCustomersInput = {
-  id?: number
+  id?: string
   name: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -557,6 +519,7 @@ export type WorkspaceUpdateToOneWithWhereWithoutCustomersInput = {
 }
 
 export type WorkspaceUpdateWithoutCustomersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -568,7 +531,7 @@ export type WorkspaceUpdateWithoutCustomersInput = {
 }
 
 export type WorkspaceUncheckedUpdateWithoutCustomersInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -580,6 +543,7 @@ export type WorkspaceUncheckedUpdateWithoutCustomersInput = {
 }
 
 export type WorkspaceCreateWithoutContactsInput = {
+  id?: string
   name: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -591,7 +555,7 @@ export type WorkspaceCreateWithoutContactsInput = {
 }
 
 export type WorkspaceUncheckedCreateWithoutContactsInput = {
-  id?: number
+  id?: string
   name: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -619,6 +583,7 @@ export type WorkspaceUpdateToOneWithWhereWithoutContactsInput = {
 }
 
 export type WorkspaceUpdateWithoutContactsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -630,7 +595,7 @@ export type WorkspaceUpdateWithoutContactsInput = {
 }
 
 export type WorkspaceUncheckedUpdateWithoutContactsInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -642,6 +607,7 @@ export type WorkspaceUncheckedUpdateWithoutContactsInput = {
 }
 
 export type WorkspaceCreateWithoutCasesInput = {
+  id?: string
   name: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -653,7 +619,7 @@ export type WorkspaceCreateWithoutCasesInput = {
 }
 
 export type WorkspaceUncheckedCreateWithoutCasesInput = {
-  id?: number
+  id?: string
   name: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -681,6 +647,7 @@ export type WorkspaceUpdateToOneWithWhereWithoutCasesInput = {
 }
 
 export type WorkspaceUpdateWithoutCasesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -692,7 +659,7 @@ export type WorkspaceUpdateWithoutCasesInput = {
 }
 
 export type WorkspaceUncheckedUpdateWithoutCasesInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -704,6 +671,7 @@ export type WorkspaceUncheckedUpdateWithoutCasesInput = {
 }
 
 export type WorkspaceCreateWithoutInvoicesInput = {
+  id?: string
   name: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -715,7 +683,7 @@ export type WorkspaceCreateWithoutInvoicesInput = {
 }
 
 export type WorkspaceUncheckedCreateWithoutInvoicesInput = {
-  id?: number
+  id?: string
   name: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -743,6 +711,7 @@ export type WorkspaceUpdateToOneWithWhereWithoutInvoicesInput = {
 }
 
 export type WorkspaceUpdateWithoutInvoicesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -754,7 +723,7 @@ export type WorkspaceUpdateWithoutInvoicesInput = {
 }
 
 export type WorkspaceUncheckedUpdateWithoutInvoicesInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -766,6 +735,7 @@ export type WorkspaceUncheckedUpdateWithoutInvoicesInput = {
 }
 
 export type WorkspaceCreateWithoutNotesInput = {
+  id?: string
   name: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -777,7 +747,7 @@ export type WorkspaceCreateWithoutNotesInput = {
 }
 
 export type WorkspaceUncheckedCreateWithoutNotesInput = {
-  id?: number
+  id?: string
   name: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -805,6 +775,7 @@ export type WorkspaceUpdateToOneWithWhereWithoutNotesInput = {
 }
 
 export type WorkspaceUpdateWithoutNotesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -816,7 +787,7 @@ export type WorkspaceUpdateWithoutNotesInput = {
 }
 
 export type WorkspaceUncheckedUpdateWithoutNotesInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -962,7 +933,7 @@ export type $WorkspacePayload<ExtArgs extends runtime.Types.Extensions.InternalA
     notes: Prisma.$NotePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
-    id: number
+    id: string
     name: string
     createdAt: Date
     updatedAt: Date
@@ -1395,7 +1366,7 @@ export interface Prisma__WorkspaceClient<T, Null = never, ExtArgs extends runtim
  * Fields of the Workspace model
  */
 export interface WorkspaceFieldRefs {
-  readonly id: Prisma.FieldRef<"Workspace", 'Int'>
+  readonly id: Prisma.FieldRef<"Workspace", 'String'>
   readonly name: Prisma.FieldRef<"Workspace", 'String'>
   readonly createdAt: Prisma.FieldRef<"Workspace", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Workspace", 'DateTime'>

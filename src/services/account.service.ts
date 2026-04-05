@@ -3,7 +3,7 @@ import {ConnectGoogleInput, UpdateAccountInput, UpdatePasswordInput} from "../va
 import bcrypt from "bcrypt";
 import {WorkspaceRole} from "../../generated/prisma/enums";
 
-export const getAccountService = async (id: number) => {
+export const getAccountService = async (id: string) => {
     const result = await prisma.user.findUnique({
         where: {
             id
@@ -13,7 +13,7 @@ export const getAccountService = async (id: number) => {
     return result
 }
 
-export const updatePasswordService = async (input: UpdatePasswordInput, id: number) => {
+export const updatePasswordService = async (input: UpdatePasswordInput, id: string) => {
     const user = await prisma.user.findUnique({
         where: {
             id
@@ -56,7 +56,7 @@ export const updatePasswordService = async (input: UpdatePasswordInput, id: numb
     return result
 }
 
-export const updateAccountService = async (input: UpdateAccountInput, id: number) => {
+export const updateAccountService = async (input: UpdateAccountInput, id: string) => {
     const existsEmail = await prisma.user.findUnique({
         where: {
             email: input.email
@@ -76,7 +76,7 @@ export const updateAccountService = async (input: UpdateAccountInput, id: number
     return result
 }
 
-export const connectGoogleService = async (input: ConnectGoogleInput, id: number) => {
+export const connectGoogleService = async (input: ConnectGoogleInput, id: string) => {
     const existsGoogleId = await prisma.user.count({
         where: {
             googleId: input.googleId
@@ -98,7 +98,7 @@ export const connectGoogleService = async (input: ConnectGoogleInput, id: number
     return result
 }
 
-export const disconnectGoogleService = async (id: number) => {
+export const disconnectGoogleService = async (id: string) => {
     const user = await prisma.user.findUnique({
         where: {
             id
@@ -120,7 +120,7 @@ export const disconnectGoogleService = async (id: number) => {
     return result
 }
 
-export const deleteAccountService = async (id: number) => {
+export const deleteAccountService = async (id: string) => {
     const myOwnerWorkspace = await prisma.workspaceMember.findMany({
         where: {
             role: WorkspaceRole.OWNER,

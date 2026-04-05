@@ -27,12 +27,9 @@ export const createLineItemController = async (req: Request, res: Response) => {
 
 export const getLineItemsController = async (req: Request, res: Response) => {
     try {
-        const invoiceId = req.query.invoiceId ? Number(req.query.invoiceId) : undefined
+        const invoiceId = typeof req.query.invoiceId === 'string' ? req.query.invoiceId : undefined
         if (!invoiceId) {
             return res.status(400).json({ message: "invoiceIdは必須です" })
-        }
-        if (isNaN(invoiceId)) {
-            return res.status(400).json({ message: "無効なIDです" })
         }
         const result = await getLineItemsService(invoiceId)
 
@@ -47,8 +44,8 @@ export const getLineItemsController = async (req: Request, res: Response) => {
 
 export const getLineItemController = async (req: Request, res: Response) => {
     try {
-        const id = Number(req.params.id)
-        if (isNaN(id)) {
+        const id = req.params.id as string
+        if (!id) {
             return res.status(400).json({ message: "無効なIDです" })
         }
 
@@ -65,8 +62,8 @@ export const getLineItemController = async (req: Request, res: Response) => {
 
 export const updateLineItemController = async (req: Request, res: Response) => {
     try {
-        const id = Number(req.params.id)
-        if (isNaN(id)) {
+        const id = req.params.id as string
+        if (!id) {
             return res.status(400).json({ message: "無効なIDです" })
         }
 
@@ -88,8 +85,8 @@ export const updateLineItemController = async (req: Request, res: Response) => {
 
 export const deleteLineItemController = async (req: Request, res: Response) => {
     try {
-        const id = Number(req.params.id)
-        if (isNaN(id)) {
+        const id = req.params.id as string
+        if (!id) {
             return res.status(400).json({ message: "無効なIDです" })
         }
 

@@ -1,7 +1,7 @@
 import {prisma} from "../lib/prisma";
 import {CreateCaseInput, UpdateCaseInput} from "../validations/case.validation";
 
-export const createCaseService = async (input: CreateCaseInput, workspaceId: number) => {
+export const createCaseService = async (input: CreateCaseInput, workspaceId: string) => {
     const result = await prisma.case.create({
         data: {
             ...input,
@@ -12,7 +12,7 @@ export const createCaseService = async (input: CreateCaseInput, workspaceId: num
     return result
 }
 
-export const getCasesService = async (workspaceId: number, customerId?: number) => {
+export const getCasesService = async (workspaceId: string, customerId?: string) => {
     const result = await prisma.case.findMany({
         where: {
             workspaceId,
@@ -23,7 +23,7 @@ export const getCasesService = async (workspaceId: number, customerId?: number) 
     return result
 }
 
-export const getCaseService = async (workspaceId: number, id: number) => {
+export const getCaseService = async (workspaceId: string, id: string) => {
     const result = await prisma.case.findUnique({
         where: {
             workspaceId,
@@ -34,7 +34,7 @@ export const getCaseService = async (workspaceId: number, id: number) => {
     return result
 }
 
-export const updateCaseService = async (input: UpdateCaseInput, workspaceId: number, id: number) => {
+export const updateCaseService = async (input: UpdateCaseInput, workspaceId: string, id: string) => {
     const result = await prisma.case.update({
         where: {
             workspaceId,
@@ -46,7 +46,7 @@ export const updateCaseService = async (input: UpdateCaseInput, workspaceId: num
     return result
 }
 
-export const deleteCaseService = async (workspaceId: number, id: number) => {
+export const deleteCaseService = async (workspaceId: string, id: string) => {
     const result = await prisma.case.delete({
         where: {
             workspaceId,

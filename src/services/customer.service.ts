@@ -1,7 +1,7 @@
 import {CreateCustomerInput, UpdateCustomerInput} from "../validations/customer.validation";
 import {prisma} from "../lib/prisma";
 
-export const createCustomerService = async (input: CreateCustomerInput, workspaceId: number) => {
+export const createCustomerService = async (input: CreateCustomerInput, workspaceId: string) => {
     const result = await prisma.customer.create({
         data: {
             ...input,
@@ -12,7 +12,7 @@ export const createCustomerService = async (input: CreateCustomerInput, workspac
     return result
 }
 
-export const updateCustomerService = async (input: UpdateCustomerInput, workspaceId: number, id: number) => {
+export const updateCustomerService = async (input: UpdateCustomerInput, workspaceId: string, id: string) => {
     const result = await prisma.customer.update({
         where: {
             id,
@@ -24,7 +24,7 @@ export const updateCustomerService = async (input: UpdateCustomerInput, workspac
     return result
 }
 
-export const getCustomersService = async (workspaceId: number) => {
+export const getCustomersService = async (workspaceId: string) => {
     const result = await prisma.customer.findMany({
         where: {
             workspaceId
@@ -34,7 +34,7 @@ export const getCustomersService = async (workspaceId: number) => {
     return result
 }
 
-export const getCustomerService = async (workspaceId: number, id: number) => {
+export const getCustomerService = async (workspaceId: string, id: string) => {
     const result = await prisma.customer.findUnique({
         where: {
             id,
@@ -45,7 +45,7 @@ export const getCustomerService = async (workspaceId: number, id: number) => {
     return result
 }
 
-export const deleteCustomerService = async (workspaceId: number, id: number) => {
+export const deleteCustomerService = async (workspaceId: string, id: string) => {
     const result = await prisma.customer.delete({
         where: {
             id,

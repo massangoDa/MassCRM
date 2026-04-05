@@ -20,26 +20,12 @@ export type ContactModel = runtime.Types.Result.DefaultSelection<Prisma.$Contact
 
 export type AggregateContact = {
   _count: ContactCountAggregateOutputType | null
-  _avg: ContactAvgAggregateOutputType | null
-  _sum: ContactSumAggregateOutputType | null
   _min: ContactMinAggregateOutputType | null
   _max: ContactMaxAggregateOutputType | null
 }
 
-export type ContactAvgAggregateOutputType = {
-  id: number | null
-  workspaceId: number | null
-  customerId: number | null
-}
-
-export type ContactSumAggregateOutputType = {
-  id: number | null
-  workspaceId: number | null
-  customerId: number | null
-}
-
 export type ContactMinAggregateOutputType = {
-  id: number | null
+  id: string | null
   lastName: string | null
   firstName: string | null
   email: string | null
@@ -47,12 +33,12 @@ export type ContactMinAggregateOutputType = {
   description: string | null
   createdAt: Date | null
   updatedAt: Date | null
-  workspaceId: number | null
-  customerId: number | null
+  workspaceId: string | null
+  customerId: string | null
 }
 
 export type ContactMaxAggregateOutputType = {
-  id: number | null
+  id: string | null
   lastName: string | null
   firstName: string | null
   email: string | null
@@ -60,8 +46,8 @@ export type ContactMaxAggregateOutputType = {
   description: string | null
   createdAt: Date | null
   updatedAt: Date | null
-  workspaceId: number | null
-  customerId: number | null
+  workspaceId: string | null
+  customerId: string | null
 }
 
 export type ContactCountAggregateOutputType = {
@@ -78,18 +64,6 @@ export type ContactCountAggregateOutputType = {
   _all: number
 }
 
-
-export type ContactAvgAggregateInputType = {
-  id?: true
-  workspaceId?: true
-  customerId?: true
-}
-
-export type ContactSumAggregateInputType = {
-  id?: true
-  workspaceId?: true
-  customerId?: true
-}
 
 export type ContactMinAggregateInputType = {
   id?: true
@@ -169,18 +143,6 @@ export type ContactAggregateArgs<ExtArgs extends runtime.Types.Extensions.Intern
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
-   * Select which fields to average
-  **/
-  _avg?: ContactAvgAggregateInputType
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-   * 
-   * Select which fields to sum
-  **/
-  _sum?: ContactSumAggregateInputType
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-   * 
    * Select which fields to find the minimum value
   **/
   _min?: ContactMinAggregateInputType
@@ -211,14 +173,12 @@ export type ContactGroupByArgs<ExtArgs extends runtime.Types.Extensions.Internal
   take?: number
   skip?: number
   _count?: ContactCountAggregateInputType | true
-  _avg?: ContactAvgAggregateInputType
-  _sum?: ContactSumAggregateInputType
   _min?: ContactMinAggregateInputType
   _max?: ContactMaxAggregateInputType
 }
 
 export type ContactGroupByOutputType = {
-  id: number
+  id: string
   lastName: string
   firstName: string | null
   email: string | null
@@ -226,11 +186,9 @@ export type ContactGroupByOutputType = {
   description: string | null
   createdAt: Date
   updatedAt: Date
-  workspaceId: number
-  customerId: number | null
+  workspaceId: string
+  customerId: string | null
   _count: ContactCountAggregateOutputType | null
-  _avg: ContactAvgAggregateOutputType | null
-  _sum: ContactSumAggregateOutputType | null
   _min: ContactMinAggregateOutputType | null
   _max: ContactMaxAggregateOutputType | null
 }
@@ -254,7 +212,7 @@ export type ContactWhereInput = {
   AND?: Prisma.ContactWhereInput | Prisma.ContactWhereInput[]
   OR?: Prisma.ContactWhereInput[]
   NOT?: Prisma.ContactWhereInput | Prisma.ContactWhereInput[]
-  id?: Prisma.IntFilter<"Contact"> | number
+  id?: Prisma.StringFilter<"Contact"> | string
   lastName?: Prisma.StringFilter<"Contact"> | string
   firstName?: Prisma.StringNullableFilter<"Contact"> | string | null
   email?: Prisma.StringNullableFilter<"Contact"> | string | null
@@ -262,8 +220,8 @@ export type ContactWhereInput = {
   description?: Prisma.StringNullableFilter<"Contact"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Contact"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Contact"> | Date | string
-  workspaceId?: Prisma.IntFilter<"Contact"> | number
-  customerId?: Prisma.IntNullableFilter<"Contact"> | number | null
+  workspaceId?: Prisma.StringFilter<"Contact"> | string
+  customerId?: Prisma.StringNullableFilter<"Contact"> | string | null
   workspace?: Prisma.XOR<Prisma.WorkspaceScalarRelationFilter, Prisma.WorkspaceWhereInput>
   customer?: Prisma.XOR<Prisma.CustomerNullableScalarRelationFilter, Prisma.CustomerWhereInput> | null
 }
@@ -284,7 +242,7 @@ export type ContactOrderByWithRelationInput = {
 }
 
 export type ContactWhereUniqueInput = Prisma.AtLeast<{
-  id?: number
+  id?: string
   AND?: Prisma.ContactWhereInput | Prisma.ContactWhereInput[]
   OR?: Prisma.ContactWhereInput[]
   NOT?: Prisma.ContactWhereInput | Prisma.ContactWhereInput[]
@@ -295,8 +253,8 @@ export type ContactWhereUniqueInput = Prisma.AtLeast<{
   description?: Prisma.StringNullableFilter<"Contact"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Contact"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Contact"> | Date | string
-  workspaceId?: Prisma.IntFilter<"Contact"> | number
-  customerId?: Prisma.IntNullableFilter<"Contact"> | number | null
+  workspaceId?: Prisma.StringFilter<"Contact"> | string
+  customerId?: Prisma.StringNullableFilter<"Contact"> | string | null
   workspace?: Prisma.XOR<Prisma.WorkspaceScalarRelationFilter, Prisma.WorkspaceWhereInput>
   customer?: Prisma.XOR<Prisma.CustomerNullableScalarRelationFilter, Prisma.CustomerWhereInput> | null
 }, "id">
@@ -313,17 +271,15 @@ export type ContactOrderByWithAggregationInput = {
   workspaceId?: Prisma.SortOrder
   customerId?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.ContactCountOrderByAggregateInput
-  _avg?: Prisma.ContactAvgOrderByAggregateInput
   _max?: Prisma.ContactMaxOrderByAggregateInput
   _min?: Prisma.ContactMinOrderByAggregateInput
-  _sum?: Prisma.ContactSumOrderByAggregateInput
 }
 
 export type ContactScalarWhereWithAggregatesInput = {
   AND?: Prisma.ContactScalarWhereWithAggregatesInput | Prisma.ContactScalarWhereWithAggregatesInput[]
   OR?: Prisma.ContactScalarWhereWithAggregatesInput[]
   NOT?: Prisma.ContactScalarWhereWithAggregatesInput | Prisma.ContactScalarWhereWithAggregatesInput[]
-  id?: Prisma.IntWithAggregatesFilter<"Contact"> | number
+  id?: Prisma.StringWithAggregatesFilter<"Contact"> | string
   lastName?: Prisma.StringWithAggregatesFilter<"Contact"> | string
   firstName?: Prisma.StringNullableWithAggregatesFilter<"Contact"> | string | null
   email?: Prisma.StringNullableWithAggregatesFilter<"Contact"> | string | null
@@ -331,11 +287,12 @@ export type ContactScalarWhereWithAggregatesInput = {
   description?: Prisma.StringNullableWithAggregatesFilter<"Contact"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Contact"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Contact"> | Date | string
-  workspaceId?: Prisma.IntWithAggregatesFilter<"Contact"> | number
-  customerId?: Prisma.IntNullableWithAggregatesFilter<"Contact"> | number | null
+  workspaceId?: Prisma.StringWithAggregatesFilter<"Contact"> | string
+  customerId?: Prisma.StringNullableWithAggregatesFilter<"Contact"> | string | null
 }
 
 export type ContactCreateInput = {
+  id?: string
   lastName: string
   firstName?: string | null
   email?: string | null
@@ -348,7 +305,7 @@ export type ContactCreateInput = {
 }
 
 export type ContactUncheckedCreateInput = {
-  id?: number
+  id?: string
   lastName: string
   firstName?: string | null
   email?: string | null
@@ -356,11 +313,12 @@ export type ContactUncheckedCreateInput = {
   description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  workspaceId: number
-  customerId?: number | null
+  workspaceId: string
+  customerId?: string | null
 }
 
 export type ContactUpdateInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
   firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -373,7 +331,7 @@ export type ContactUpdateInput = {
 }
 
 export type ContactUncheckedUpdateInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
   firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -381,12 +339,12 @@ export type ContactUncheckedUpdateInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  workspaceId?: Prisma.IntFieldUpdateOperationsInput | number
-  customerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  workspaceId?: Prisma.StringFieldUpdateOperationsInput | string
+  customerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type ContactCreateManyInput = {
-  id?: number
+  id?: string
   lastName: string
   firstName?: string | null
   email?: string | null
@@ -394,11 +352,12 @@ export type ContactCreateManyInput = {
   description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  workspaceId: number
-  customerId?: number | null
+  workspaceId: string
+  customerId?: string | null
 }
 
 export type ContactUpdateManyMutationInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
   firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -409,7 +368,7 @@ export type ContactUpdateManyMutationInput = {
 }
 
 export type ContactUncheckedUpdateManyInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
   firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -417,8 +376,8 @@ export type ContactUncheckedUpdateManyInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  workspaceId?: Prisma.IntFieldUpdateOperationsInput | number
-  customerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  workspaceId?: Prisma.StringFieldUpdateOperationsInput | string
+  customerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type ContactListRelationFilter = {
@@ -440,12 +399,6 @@ export type ContactCountOrderByAggregateInput = {
   description?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  workspaceId?: Prisma.SortOrder
-  customerId?: Prisma.SortOrder
-}
-
-export type ContactAvgOrderByAggregateInput = {
-  id?: Prisma.SortOrder
   workspaceId?: Prisma.SortOrder
   customerId?: Prisma.SortOrder
 }
@@ -472,12 +425,6 @@ export type ContactMinOrderByAggregateInput = {
   description?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  workspaceId?: Prisma.SortOrder
-  customerId?: Prisma.SortOrder
-}
-
-export type ContactSumOrderByAggregateInput = {
-  id?: Prisma.SortOrder
   workspaceId?: Prisma.SortOrder
   customerId?: Prisma.SortOrder
 }
@@ -566,15 +513,8 @@ export type ContactUncheckedUpdateManyWithoutCustomerNestedInput = {
   deleteMany?: Prisma.ContactScalarWhereInput | Prisma.ContactScalarWhereInput[]
 }
 
-export type NullableIntFieldUpdateOperationsInput = {
-  set?: number | null
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
-}
-
 export type ContactCreateWithoutWorkspaceInput = {
+  id?: string
   lastName: string
   firstName?: string | null
   email?: string | null
@@ -586,7 +526,7 @@ export type ContactCreateWithoutWorkspaceInput = {
 }
 
 export type ContactUncheckedCreateWithoutWorkspaceInput = {
-  id?: number
+  id?: string
   lastName: string
   firstName?: string | null
   email?: string | null
@@ -594,7 +534,7 @@ export type ContactUncheckedCreateWithoutWorkspaceInput = {
   description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  customerId?: number | null
+  customerId?: string | null
 }
 
 export type ContactCreateOrConnectWithoutWorkspaceInput = {
@@ -627,7 +567,7 @@ export type ContactScalarWhereInput = {
   AND?: Prisma.ContactScalarWhereInput | Prisma.ContactScalarWhereInput[]
   OR?: Prisma.ContactScalarWhereInput[]
   NOT?: Prisma.ContactScalarWhereInput | Prisma.ContactScalarWhereInput[]
-  id?: Prisma.IntFilter<"Contact"> | number
+  id?: Prisma.StringFilter<"Contact"> | string
   lastName?: Prisma.StringFilter<"Contact"> | string
   firstName?: Prisma.StringNullableFilter<"Contact"> | string | null
   email?: Prisma.StringNullableFilter<"Contact"> | string | null
@@ -635,11 +575,12 @@ export type ContactScalarWhereInput = {
   description?: Prisma.StringNullableFilter<"Contact"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Contact"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Contact"> | Date | string
-  workspaceId?: Prisma.IntFilter<"Contact"> | number
-  customerId?: Prisma.IntNullableFilter<"Contact"> | number | null
+  workspaceId?: Prisma.StringFilter<"Contact"> | string
+  customerId?: Prisma.StringNullableFilter<"Contact"> | string | null
 }
 
 export type ContactCreateWithoutCustomerInput = {
+  id?: string
   lastName: string
   firstName?: string | null
   email?: string | null
@@ -651,7 +592,7 @@ export type ContactCreateWithoutCustomerInput = {
 }
 
 export type ContactUncheckedCreateWithoutCustomerInput = {
-  id?: number
+  id?: string
   lastName: string
   firstName?: string | null
   email?: string | null
@@ -659,7 +600,7 @@ export type ContactUncheckedCreateWithoutCustomerInput = {
   description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  workspaceId: number
+  workspaceId: string
 }
 
 export type ContactCreateOrConnectWithoutCustomerInput = {
@@ -689,7 +630,7 @@ export type ContactUpdateManyWithWhereWithoutCustomerInput = {
 }
 
 export type ContactCreateManyWorkspaceInput = {
-  id?: number
+  id?: string
   lastName: string
   firstName?: string | null
   email?: string | null
@@ -697,10 +638,11 @@ export type ContactCreateManyWorkspaceInput = {
   description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  customerId?: number | null
+  customerId?: string | null
 }
 
 export type ContactUpdateWithoutWorkspaceInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
   firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -712,7 +654,7 @@ export type ContactUpdateWithoutWorkspaceInput = {
 }
 
 export type ContactUncheckedUpdateWithoutWorkspaceInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
   firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -720,11 +662,11 @@ export type ContactUncheckedUpdateWithoutWorkspaceInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  customerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  customerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type ContactUncheckedUpdateManyWithoutWorkspaceInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
   firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -732,11 +674,11 @@ export type ContactUncheckedUpdateManyWithoutWorkspaceInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  customerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  customerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type ContactCreateManyCustomerInput = {
-  id?: number
+  id?: string
   lastName: string
   firstName?: string | null
   email?: string | null
@@ -744,10 +686,11 @@ export type ContactCreateManyCustomerInput = {
   description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  workspaceId: number
+  workspaceId: string
 }
 
 export type ContactUpdateWithoutCustomerInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
   firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -759,7 +702,7 @@ export type ContactUpdateWithoutCustomerInput = {
 }
 
 export type ContactUncheckedUpdateWithoutCustomerInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
   firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -767,11 +710,11 @@ export type ContactUncheckedUpdateWithoutCustomerInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  workspaceId?: Prisma.IntFieldUpdateOperationsInput | number
+  workspaceId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type ContactUncheckedUpdateManyWithoutCustomerInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
   firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -779,7 +722,7 @@ export type ContactUncheckedUpdateManyWithoutCustomerInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  workspaceId?: Prisma.IntFieldUpdateOperationsInput | number
+  workspaceId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 
@@ -863,7 +806,7 @@ export type $ContactPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     customer: Prisma.$CustomerPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
-    id: number
+    id: string
     lastName: string
     firstName: string | null
     email: string | null
@@ -871,8 +814,8 @@ export type $ContactPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     description: string | null
     createdAt: Date
     updatedAt: Date
-    workspaceId: number
-    customerId: number | null
+    workspaceId: string
+    customerId: string | null
   }, ExtArgs["result"]["contact"]>
   composites: {}
 }
@@ -1298,7 +1241,7 @@ export interface Prisma__ContactClient<T, Null = never, ExtArgs extends runtime.
  * Fields of the Contact model
  */
 export interface ContactFieldRefs {
-  readonly id: Prisma.FieldRef<"Contact", 'Int'>
+  readonly id: Prisma.FieldRef<"Contact", 'String'>
   readonly lastName: Prisma.FieldRef<"Contact", 'String'>
   readonly firstName: Prisma.FieldRef<"Contact", 'String'>
   readonly email: Prisma.FieldRef<"Contact", 'String'>
@@ -1306,8 +1249,8 @@ export interface ContactFieldRefs {
   readonly description: Prisma.FieldRef<"Contact", 'String'>
   readonly createdAt: Prisma.FieldRef<"Contact", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Contact", 'DateTime'>
-  readonly workspaceId: Prisma.FieldRef<"Contact", 'Int'>
-  readonly customerId: Prisma.FieldRef<"Contact", 'Int'>
+  readonly workspaceId: Prisma.FieldRef<"Contact", 'String'>
+  readonly customerId: Prisma.FieldRef<"Contact", 'String'>
 }
     
 

@@ -1,7 +1,7 @@
 import {prisma} from "../lib/prisma";
 import {CreateContactInput, UpdateContactInput} from "../validations/contact.validation";
 
-export const createContactService = async (input: CreateContactInput, workspaceId: number) => {
+export const createContactService = async (input: CreateContactInput, workspaceId: string) => {
     const result = await prisma.contact.create({
         data: {
             ...input,
@@ -12,7 +12,7 @@ export const createContactService = async (input: CreateContactInput, workspaceI
     return result
 }
 
-export const getContactsService = async (workspaceId: number, customerId?: number) => {
+export const getContactsService = async (workspaceId: string, customerId?: string) => {
     const result = await prisma.contact.findMany({
         where: {
             workspaceId,
@@ -23,7 +23,7 @@ export const getContactsService = async (workspaceId: number, customerId?: numbe
     return result
 }
 
-export const getContactService = async (workspaceId: number, id: number) => {
+export const getContactService = async (workspaceId: string, id: string) => {
     const result = await prisma.contact.findUnique({
         where: {
             workspaceId,
@@ -34,7 +34,7 @@ export const getContactService = async (workspaceId: number, id: number) => {
     return result
 }
 
-export const updateContactService = async (input: UpdateContactInput, workspaceId: number, id: number) => {
+export const updateContactService = async (input: UpdateContactInput, workspaceId: string, id: string) => {
     const result = await prisma.contact.update({
         where: {
             workspaceId,
@@ -46,7 +46,7 @@ export const updateContactService = async (input: UpdateContactInput, workspaceI
     return result
 }
 
-export const deleteContactService = async (workspaceId: number, id: number) => {
+export const deleteContactService = async (workspaceId: string, id: string) => {
     const result = await prisma.contact.delete({
         where: {
             workspaceId,

@@ -28,10 +28,7 @@ export const createCaseController = async (req: Request, res: Response) => {
 
 export const getCasesController = async (req: Request, res: Response) => {
     try {
-        const customerId = req.query.customerId ? Number(req.query.customerId) : undefined
-        if (customerId !== undefined && isNaN(customerId)) {
-            return res.status(400).json({ message: "無効なIDです" })
-        }
+        const customerId = typeof req.query.customerId === 'string' ? req.query.customerId : undefined
 
         const result = await getCasesService(req.user!.workspaceId, customerId)
 
@@ -46,8 +43,8 @@ export const getCasesController = async (req: Request, res: Response) => {
 
 export const getCaseController = async (req: Request, res: Response) => {
     try {
-        const id = Number(req.params.id)
-        if (isNaN(id)) {
+        const id = req.params.id as string
+        if (!id) {
             return res.status(400).json({ message: "無効なIDです" })
         }
 
@@ -64,8 +61,8 @@ export const getCaseController = async (req: Request, res: Response) => {
 
 export const updateCaseController = async (req: Request, res: Response) => {
     try {
-        const id = Number(req.params.id)
-        if (isNaN(id)) {
+        const id = req.params.id as string
+        if (!id) {
             return res.status(400).json({ message: "無効なIDです" })
         }
 
@@ -87,8 +84,8 @@ export const updateCaseController = async (req: Request, res: Response) => {
 
 export const deleteCaseController = async (req: Request, res: Response) => {
     try {
-        const id = Number(req.params.id)
-        if (isNaN(id)) {
+        const id = req.params.id as string
+        if (!id) {
             return res.status(400).json({ message: "無効なIDです" })
         }
 

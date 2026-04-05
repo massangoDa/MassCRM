@@ -13,7 +13,7 @@ export const CreateCaseSchema = z.object({
     isRecurring: z.boolean(),
     billingCycle: z.nativeEnum(BillingCycle).optional(),
     nextBillingDate: z.coerce.date().optional(),
-    customerId: z.number()
+    customerId: z.string()
 })
 
 export const UpdateCaseSchema = z.object({

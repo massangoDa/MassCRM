@@ -11,7 +11,7 @@ export const CreateInvoiceSchema = z.object({
     dueDate: z.coerce.date(),
     status: z.nativeEnum(InvoiceStatus).optional(),
     description: z.string().optional(),
-    caseId: z.number()
+    caseId: z.string()
 })
 
 export const UpdateInvoiceSchema = z.object({
@@ -31,7 +31,7 @@ export const CreateLineItemSchema = z.object({
     amount: z.number(),
     quantity: z.number(),
     taxRate: z.number(),
-    invoiceId: z.number()
+    invoiceId: z.string()
 })
 
 export const UpdateLineItemSchema = z.object({

@@ -2,7 +2,7 @@ import {prisma} from "../lib/prisma";
 import {CreateInvoiceInput, UpdateInvoiceInput} from "../validations/invoice.validation";
 import {InvoiceStatus} from "../../generated/prisma/enums";
 
-export const createInvoiceService = async (input: CreateInvoiceInput, workspaceId: number) => {
+export const createInvoiceService = async (input: CreateInvoiceInput, workspaceId: string) => {
     const case_ = await prisma.case.findUnique({
         where: {
             workspaceId,
@@ -27,7 +27,7 @@ export const createInvoiceService = async (input: CreateInvoiceInput, workspaceI
     return result
 }
 
-export const getInvoicesService = async (workspaceId: number, caseId?: number) => {
+export const getInvoicesService = async (workspaceId: string, caseId?: string) => {
     const result = await prisma.invoice.findMany({
         where: {
             workspaceId,
@@ -38,7 +38,7 @@ export const getInvoicesService = async (workspaceId: number, caseId?: number) =
     return result
 }
 
-export const getInvoiceService = async (workspaceId: number, id: number) => {
+export const getInvoiceService = async (workspaceId: string, id: string) => {
     const result = await prisma.invoice.findUnique({
         where: {
             workspaceId,
@@ -49,7 +49,7 @@ export const getInvoiceService = async (workspaceId: number, id: number) => {
     return result
 }
 
-export const updateInvoiceService = async (input: UpdateInvoiceInput, workspaceId: number, id: number) => {
+export const updateInvoiceService = async (input: UpdateInvoiceInput, workspaceId: string, id: string) => {
     const invoice = await prisma.invoice.findUnique({
         where: { id, workspaceId }
     })
@@ -71,7 +71,7 @@ export const updateInvoiceService = async (input: UpdateInvoiceInput, workspaceI
     return result
 }
 
-export const deleteInvoiceService = async (workspaceId: number, id: number) => {
+export const deleteInvoiceService = async (workspaceId: string, id: string) => {
     const invoice = await prisma.invoice.findUnique({
         where: { id, workspaceId }
     })

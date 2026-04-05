@@ -28,10 +28,7 @@ export const createNoteController = async (req: Request, res: Response) => {
 
 export const getNotesController = async (req: Request, res: Response) => {
     try {
-        const customerId = req.query.customerId ? Number(req.query.customerId) : undefined
-        if (customerId !== undefined && isNaN(customerId)) {
-            return res.status(400).json({ message: "無効なIDです" })
-        }
+        const customerId = typeof req.query.customerId === 'string' ? req.query.customerId : undefined
         const result = await getNotesService(req.user!.workspaceId, customerId)
 
         res.status(200).json(result)
@@ -45,8 +42,8 @@ export const getNotesController = async (req: Request, res: Response) => {
 
 export const getNoteController = async (req: Request, res: Response) => {
     try {
-        const id = Number(req.params.id)
-        if (isNaN(id)) {
+        const id = req.params.id as string
+        if (!id) {
             return res.status(400).json({ message: "無効なIDです" })
         }
 
@@ -63,8 +60,8 @@ export const getNoteController = async (req: Request, res: Response) => {
 
 export const updateNoteController = async (req: Request, res: Response) => {
     try {
-        const id = Number(req.params.id)
-        if (isNaN(id)) {
+        const id = req.params.id as string
+        if (!id) {
             return res.status(400).json({ message: "無効なIDです" })
         }
 
@@ -86,8 +83,8 @@ export const updateNoteController = async (req: Request, res: Response) => {
 
 export const deleteNoteController = async (req: Request, res: Response) => {
     try {
-        const id = Number(req.params.id)
-        if (isNaN(id)) {
+        const id = req.params.id as string
+        if (!id) {
             return res.status(400).json({ message: "無効なIDです" })
         }
 

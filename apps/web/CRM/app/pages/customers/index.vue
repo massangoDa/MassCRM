@@ -79,7 +79,8 @@ const formField = [
 const columns: TableColumn<Customer>[] = [
   {
     accessorKey: 'id',
-    header: 'ID'
+    header: 'ID',
+    cell: ({ row }) => row.index + 1
   },
   {
     accessorKey: 'name',

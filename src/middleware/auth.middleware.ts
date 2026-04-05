@@ -12,7 +12,7 @@ export const authenticateToken = async (req: Request, res: Response, next: NextF
         }
 
         const secretKey = process.env.JWT_SECRET_KEY || 'test'
-        const decoded = jwt.verify(token, secretKey) as { id: number, workspaceId: number }
+        const decoded = jwt.verify(token, secretKey) as { id: string, workspaceId: string }
 
         const member = await prisma.workspaceMember.findFirst({
             where: {

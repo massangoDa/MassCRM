@@ -7,7 +7,7 @@ import {
 } from "../validations/workspace.validation";
 import {WorkspaceRole} from "../../generated/prisma/enums";
 
-export const createWorkspaceService = async (input: CreateWorkspaceInput, userId: number) => {
+export const createWorkspaceService = async (input: CreateWorkspaceInput, userId: string) => {
     const result = await prisma.workspace.create({
         data: {
             ...input,
@@ -23,7 +23,7 @@ export const createWorkspaceService = async (input: CreateWorkspaceInput, userId
     return result
 }
 
-export const getWorkspacesService = async (userId: number) => {
+export const getWorkspacesService = async (userId: string) => {
     const result = await prisma.workspace.findMany({
         where: {
             members: {
@@ -37,7 +37,7 @@ export const getWorkspacesService = async (userId: number) => {
     return result
 }
 
-export const getWorkspaceService = async (id: number) => {
+export const getWorkspaceService = async (id: string) => {
     const result = await prisma.workspace.findUnique({
         where: {
             id
@@ -47,7 +47,7 @@ export const getWorkspaceService = async (id: number) => {
     return result
 }
 
-export const updateWorkspaceService = async (input: UpdateWorkspaceInput, id: number, userId: number) => {
+export const updateWorkspaceService = async (input: UpdateWorkspaceInput, id: string, userId: string) => {
     const member = await prisma.workspaceMember.findUnique({
         where: {
             userId_workspaceId: {
@@ -70,7 +70,7 @@ export const updateWorkspaceService = async (input: UpdateWorkspaceInput, id: nu
     return result
 }
 
-export const deleteWorkspaceService = async (id: number, userId: number) => {
+export const deleteWorkspaceService = async (id: string, userId: string) => {
     const member = await prisma.workspaceMember.findUnique({
         where: {
             userId_workspaceId: {
@@ -98,7 +98,7 @@ export const deleteWorkspaceService = async (id: number, userId: number) => {
 
 // メンバー
 
-export const getMembersService = async (id: number) => {
+export const getMembersService = async (id: string) => {
     const result = await prisma.workspace.findUnique({
         where: {
             id
@@ -111,7 +111,7 @@ export const getMembersService = async (id: number) => {
     return result
 }
 
-export const addMemberService = async (input: AddMemberInput, id: number, userId: number) => {
+export const addMemberService = async (input: AddMemberInput, id: string, userId: string) => {
     const user = await prisma.workspaceMember.findUnique({
         where: {
             userId_workspaceId: {
@@ -156,7 +156,7 @@ export const addMemberService = async (input: AddMemberInput, id: number, userId
     return result
 }
 
-export const updateMemberRoleService = async (input: UpdateMemberRoleInput, id: number, userId: number, targetUserId: number) => {
+export const updateMemberRoleService = async (input: UpdateMemberRoleInput, id: string, userId: string, targetUserId: string) => {
     const user = await prisma.workspaceMember.findUnique({
         where: {
             userId_workspaceId: {
@@ -194,7 +194,7 @@ export const updateMemberRoleService = async (input: UpdateMemberRoleInput, id: 
     return result
 }
 
-export const deleteMemberService = async (id: number, userId: number, targetUserId: number) => {
+export const deleteMemberService = async (id: string, userId: string, targetUserId: string) => {
     const member = await prisma.workspaceMember.findUnique({
         where: {
             userId_workspaceId: {

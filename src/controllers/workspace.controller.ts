@@ -46,8 +46,8 @@ export const getWorkspacesController = async (req: Request, res: Response) => {
 
 export const getWorkspaceController = async (req: Request, res: Response) => {
     try {
-        const id = Number(req.params.id)
-        if (isNaN(id)) {
+        const id = req.params.id as string
+        if (!id) {
             return res.status(400).json({ message: "無効なIDです" })
         }
 
@@ -64,8 +64,8 @@ export const getWorkspaceController = async (req: Request, res: Response) => {
 
 export const updateWorkspaceController = async (req: Request, res: Response) => {
     try {
-        const id = Number(req.params.id)
-        if (isNaN(id)) {
+        const id = req.params.id as string
+        if (!id) {
             return res.status(400).json({ message: "無効なIDです" })
         }
 
@@ -87,8 +87,8 @@ export const updateWorkspaceController = async (req: Request, res: Response) => 
 
 export const deleteWorkspaceController = async (req: Request, res: Response) => {
     try {
-        const id = Number(req.params.id)
-        if (isNaN(id)) {
+        const id = req.params.id as string
+        if (!id) {
             return res.status(400).json({ message: "無効なIDです" })
         }
 
@@ -106,8 +106,8 @@ export const deleteWorkspaceController = async (req: Request, res: Response) => 
 // メンバー
 export const getMembersController = async (req: Request, res: Response) => {
     try {
-        const id = Number(req.params.id)
-        if (isNaN(id)) {
+        const id = req.params.id as string
+        if (!id) {
             return res.status(400).json({ message: "無効なIDです" })
         }
 
@@ -124,8 +124,8 @@ export const getMembersController = async (req: Request, res: Response) => {
 
 export const addMemberController = async (req: Request, res: Response) => {
     try {
-        const id = Number(req.params.id)
-        if (isNaN(id)) {
+        const id = req.params.id as string
+        if (!id) {
             return res.status(400).json({ message: "無効なIDです" })
         }
 
@@ -147,13 +147,13 @@ export const addMemberController = async (req: Request, res: Response) => {
 
 export const updateMemberRoleController = async (req: Request, res: Response) => {
     try {
-        const id = Number(req.params.id)
-        if (isNaN(id)) {
+        const id = req.params.id as string
+        if (!id) {
             return res.status(400).json({ message: "無効なIDです" })
         }
 
-        const targetUserId = Number(req.params.targetUserId)
-        if (isNaN(targetUserId)) {
+        const targetUserId = req.params.targetUserId as string
+        if (!targetUserId) {
             return res.status(400).json({ message: "無効なIDです" })
         }
 
@@ -175,13 +175,13 @@ export const updateMemberRoleController = async (req: Request, res: Response) =>
 
 export const deleteMemberController = async (req: Request, res: Response) => {
     try {
-        const id = Number(req.params.id)
-        if (isNaN(id)) {
+        const id = req.params.id as string
+        if (!id) {
             return res.status(400).json({ message: "無効なIDです" })
         }
 
-        const targetUserId = Number(req.params.targetUserId)
-        if (isNaN(targetUserId)) {
+        const targetUserId = req.params.targetUserId as string
+        if (!targetUserId) {
             return res.status(400).json({ message: "無効なIDです" })
         }
 

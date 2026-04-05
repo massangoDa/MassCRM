@@ -90,7 +90,7 @@ export const loginService = async (input: LoginInput) => {
 
 export const verifyTokenService = async (token: string) => {
     const secretKey = process.env.JWT_SECRET_KEY || 'test'
-    const decoded = jwt.verify(token, secretKey) as { id: number, workspaceId: number }
+    const decoded = jwt.verify(token, secretKey) as { id: string, workspaceId: string }
 
     return prisma.user.findUnique({
         where: {

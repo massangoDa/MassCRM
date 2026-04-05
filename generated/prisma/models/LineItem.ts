@@ -27,41 +27,37 @@ export type AggregateLineItem = {
 }
 
 export type LineItemAvgAggregateOutputType = {
-  id: number | null
   amount: number | null
   quantity: number | null
   taxRate: number | null
-  invoiceId: number | null
 }
 
 export type LineItemSumAggregateOutputType = {
-  id: number | null
   amount: number | null
   quantity: number | null
   taxRate: number | null
-  invoiceId: number | null
 }
 
 export type LineItemMinAggregateOutputType = {
-  id: number | null
+  id: string | null
   name: string | null
   amount: number | null
   quantity: number | null
   taxRate: number | null
   createdAt: Date | null
   updatedAt: Date | null
-  invoiceId: number | null
+  invoiceId: string | null
 }
 
 export type LineItemMaxAggregateOutputType = {
-  id: number | null
+  id: string | null
   name: string | null
   amount: number | null
   quantity: number | null
   taxRate: number | null
   createdAt: Date | null
   updatedAt: Date | null
-  invoiceId: number | null
+  invoiceId: string | null
 }
 
 export type LineItemCountAggregateOutputType = {
@@ -78,19 +74,15 @@ export type LineItemCountAggregateOutputType = {
 
 
 export type LineItemAvgAggregateInputType = {
-  id?: true
   amount?: true
   quantity?: true
   taxRate?: true
-  invoiceId?: true
 }
 
 export type LineItemSumAggregateInputType = {
-  id?: true
   amount?: true
   quantity?: true
   taxRate?: true
-  invoiceId?: true
 }
 
 export type LineItemMinAggregateInputType = {
@@ -214,14 +206,14 @@ export type LineItemGroupByArgs<ExtArgs extends runtime.Types.Extensions.Interna
 }
 
 export type LineItemGroupByOutputType = {
-  id: number
+  id: string
   name: string
   amount: number
   quantity: number
   taxRate: number
   createdAt: Date
   updatedAt: Date
-  invoiceId: number
+  invoiceId: string
   _count: LineItemCountAggregateOutputType | null
   _avg: LineItemAvgAggregateOutputType | null
   _sum: LineItemSumAggregateOutputType | null
@@ -248,14 +240,14 @@ export type LineItemWhereInput = {
   AND?: Prisma.LineItemWhereInput | Prisma.LineItemWhereInput[]
   OR?: Prisma.LineItemWhereInput[]
   NOT?: Prisma.LineItemWhereInput | Prisma.LineItemWhereInput[]
-  id?: Prisma.IntFilter<"LineItem"> | number
+  id?: Prisma.StringFilter<"LineItem"> | string
   name?: Prisma.StringFilter<"LineItem"> | string
   amount?: Prisma.IntFilter<"LineItem"> | number
   quantity?: Prisma.IntFilter<"LineItem"> | number
   taxRate?: Prisma.IntFilter<"LineItem"> | number
   createdAt?: Prisma.DateTimeFilter<"LineItem"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"LineItem"> | Date | string
-  invoiceId?: Prisma.IntFilter<"LineItem"> | number
+  invoiceId?: Prisma.StringFilter<"LineItem"> | string
   invoice?: Prisma.XOR<Prisma.InvoiceScalarRelationFilter, Prisma.InvoiceWhereInput>
 }
 
@@ -272,7 +264,7 @@ export type LineItemOrderByWithRelationInput = {
 }
 
 export type LineItemWhereUniqueInput = Prisma.AtLeast<{
-  id?: number
+  id?: string
   AND?: Prisma.LineItemWhereInput | Prisma.LineItemWhereInput[]
   OR?: Prisma.LineItemWhereInput[]
   NOT?: Prisma.LineItemWhereInput | Prisma.LineItemWhereInput[]
@@ -282,7 +274,7 @@ export type LineItemWhereUniqueInput = Prisma.AtLeast<{
   taxRate?: Prisma.IntFilter<"LineItem"> | number
   createdAt?: Prisma.DateTimeFilter<"LineItem"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"LineItem"> | Date | string
-  invoiceId?: Prisma.IntFilter<"LineItem"> | number
+  invoiceId?: Prisma.StringFilter<"LineItem"> | string
   invoice?: Prisma.XOR<Prisma.InvoiceScalarRelationFilter, Prisma.InvoiceWhereInput>
 }, "id">
 
@@ -306,17 +298,18 @@ export type LineItemScalarWhereWithAggregatesInput = {
   AND?: Prisma.LineItemScalarWhereWithAggregatesInput | Prisma.LineItemScalarWhereWithAggregatesInput[]
   OR?: Prisma.LineItemScalarWhereWithAggregatesInput[]
   NOT?: Prisma.LineItemScalarWhereWithAggregatesInput | Prisma.LineItemScalarWhereWithAggregatesInput[]
-  id?: Prisma.IntWithAggregatesFilter<"LineItem"> | number
+  id?: Prisma.StringWithAggregatesFilter<"LineItem"> | string
   name?: Prisma.StringWithAggregatesFilter<"LineItem"> | string
   amount?: Prisma.IntWithAggregatesFilter<"LineItem"> | number
   quantity?: Prisma.IntWithAggregatesFilter<"LineItem"> | number
   taxRate?: Prisma.IntWithAggregatesFilter<"LineItem"> | number
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"LineItem"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"LineItem"> | Date | string
-  invoiceId?: Prisma.IntWithAggregatesFilter<"LineItem"> | number
+  invoiceId?: Prisma.StringWithAggregatesFilter<"LineItem"> | string
 }
 
 export type LineItemCreateInput = {
+  id?: string
   name: string
   amount: number
   quantity?: number
@@ -327,17 +320,18 @@ export type LineItemCreateInput = {
 }
 
 export type LineItemUncheckedCreateInput = {
-  id?: number
+  id?: string
   name: string
   amount: number
   quantity?: number
   taxRate?: number
   createdAt?: Date | string
   updatedAt?: Date | string
-  invoiceId: number
+  invoiceId: string
 }
 
 export type LineItemUpdateInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.IntFieldUpdateOperationsInput | number
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
@@ -348,28 +342,29 @@ export type LineItemUpdateInput = {
 }
 
 export type LineItemUncheckedUpdateInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.IntFieldUpdateOperationsInput | number
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   taxRate?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  invoiceId?: Prisma.IntFieldUpdateOperationsInput | number
+  invoiceId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type LineItemCreateManyInput = {
-  id?: number
+  id?: string
   name: string
   amount: number
   quantity?: number
   taxRate?: number
   createdAt?: Date | string
   updatedAt?: Date | string
-  invoiceId: number
+  invoiceId: string
 }
 
 export type LineItemUpdateManyMutationInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.IntFieldUpdateOperationsInput | number
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
@@ -379,14 +374,14 @@ export type LineItemUpdateManyMutationInput = {
 }
 
 export type LineItemUncheckedUpdateManyInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.IntFieldUpdateOperationsInput | number
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   taxRate?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  invoiceId?: Prisma.IntFieldUpdateOperationsInput | number
+  invoiceId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type LineItemListRelationFilter = {
@@ -411,11 +406,9 @@ export type LineItemCountOrderByAggregateInput = {
 }
 
 export type LineItemAvgOrderByAggregateInput = {
-  id?: Prisma.SortOrder
   amount?: Prisma.SortOrder
   quantity?: Prisma.SortOrder
   taxRate?: Prisma.SortOrder
-  invoiceId?: Prisma.SortOrder
 }
 
 export type LineItemMaxOrderByAggregateInput = {
@@ -441,11 +434,9 @@ export type LineItemMinOrderByAggregateInput = {
 }
 
 export type LineItemSumOrderByAggregateInput = {
-  id?: Prisma.SortOrder
   amount?: Prisma.SortOrder
   quantity?: Prisma.SortOrder
   taxRate?: Prisma.SortOrder
-  invoiceId?: Prisma.SortOrder
 }
 
 export type LineItemCreateNestedManyWithoutInvoiceInput = {
@@ -491,6 +482,7 @@ export type LineItemUncheckedUpdateManyWithoutInvoiceNestedInput = {
 }
 
 export type LineItemCreateWithoutInvoiceInput = {
+  id?: string
   name: string
   amount: number
   quantity?: number
@@ -500,7 +492,7 @@ export type LineItemCreateWithoutInvoiceInput = {
 }
 
 export type LineItemUncheckedCreateWithoutInvoiceInput = {
-  id?: number
+  id?: string
   name: string
   amount: number
   quantity?: number
@@ -539,18 +531,18 @@ export type LineItemScalarWhereInput = {
   AND?: Prisma.LineItemScalarWhereInput | Prisma.LineItemScalarWhereInput[]
   OR?: Prisma.LineItemScalarWhereInput[]
   NOT?: Prisma.LineItemScalarWhereInput | Prisma.LineItemScalarWhereInput[]
-  id?: Prisma.IntFilter<"LineItem"> | number
+  id?: Prisma.StringFilter<"LineItem"> | string
   name?: Prisma.StringFilter<"LineItem"> | string
   amount?: Prisma.IntFilter<"LineItem"> | number
   quantity?: Prisma.IntFilter<"LineItem"> | number
   taxRate?: Prisma.IntFilter<"LineItem"> | number
   createdAt?: Prisma.DateTimeFilter<"LineItem"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"LineItem"> | Date | string
-  invoiceId?: Prisma.IntFilter<"LineItem"> | number
+  invoiceId?: Prisma.StringFilter<"LineItem"> | string
 }
 
 export type LineItemCreateManyInvoiceInput = {
-  id?: number
+  id?: string
   name: string
   amount: number
   quantity?: number
@@ -560,6 +552,7 @@ export type LineItemCreateManyInvoiceInput = {
 }
 
 export type LineItemUpdateWithoutInvoiceInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.IntFieldUpdateOperationsInput | number
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
@@ -569,7 +562,7 @@ export type LineItemUpdateWithoutInvoiceInput = {
 }
 
 export type LineItemUncheckedUpdateWithoutInvoiceInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.IntFieldUpdateOperationsInput | number
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
@@ -579,7 +572,7 @@ export type LineItemUncheckedUpdateWithoutInvoiceInput = {
 }
 
 export type LineItemUncheckedUpdateManyWithoutInvoiceInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.IntFieldUpdateOperationsInput | number
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
@@ -654,14 +647,14 @@ export type $LineItemPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     invoice: Prisma.$InvoicePayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
-    id: number
+    id: string
     name: string
     amount: number
     quantity: number
     taxRate: number
     createdAt: Date
     updatedAt: Date
-    invoiceId: number
+    invoiceId: string
   }, ExtArgs["result"]["lineItem"]>
   composites: {}
 }
@@ -1086,14 +1079,14 @@ export interface Prisma__LineItemClient<T, Null = never, ExtArgs extends runtime
  * Fields of the LineItem model
  */
 export interface LineItemFieldRefs {
-  readonly id: Prisma.FieldRef<"LineItem", 'Int'>
+  readonly id: Prisma.FieldRef<"LineItem", 'String'>
   readonly name: Prisma.FieldRef<"LineItem", 'String'>
   readonly amount: Prisma.FieldRef<"LineItem", 'Int'>
   readonly quantity: Prisma.FieldRef<"LineItem", 'Int'>
   readonly taxRate: Prisma.FieldRef<"LineItem", 'Int'>
   readonly createdAt: Prisma.FieldRef<"LineItem", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"LineItem", 'DateTime'>
-  readonly invoiceId: Prisma.FieldRef<"LineItem", 'Int'>
+  readonly invoiceId: Prisma.FieldRef<"LineItem", 'String'>
 }
     
 

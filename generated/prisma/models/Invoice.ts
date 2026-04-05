@@ -27,29 +27,21 @@ export type AggregateInvoice = {
 }
 
 export type InvoiceAvgAggregateOutputType = {
-  id: number | null
   subtotal: number | null
   tax: number | null
   withholdingTax: number | null
   total: number | null
-  workspaceId: number | null
-  customerId: number | null
-  caseId: number | null
 }
 
 export type InvoiceSumAggregateOutputType = {
-  id: number | null
   subtotal: number | null
   tax: number | null
   withholdingTax: number | null
   total: number | null
-  workspaceId: number | null
-  customerId: number | null
-  caseId: number | null
 }
 
 export type InvoiceMinAggregateOutputType = {
-  id: number | null
+  id: string | null
   number: string | null
   subtotal: number | null
   tax: number | null
@@ -61,13 +53,13 @@ export type InvoiceMinAggregateOutputType = {
   description: string | null
   createdAt: Date | null
   updatedAt: Date | null
-  workspaceId: number | null
-  customerId: number | null
-  caseId: number | null
+  workspaceId: string | null
+  customerId: string | null
+  caseId: string | null
 }
 
 export type InvoiceMaxAggregateOutputType = {
-  id: number | null
+  id: string | null
   number: string | null
   subtotal: number | null
   tax: number | null
@@ -79,9 +71,9 @@ export type InvoiceMaxAggregateOutputType = {
   description: string | null
   createdAt: Date | null
   updatedAt: Date | null
-  workspaceId: number | null
-  customerId: number | null
-  caseId: number | null
+  workspaceId: string | null
+  customerId: string | null
+  caseId: string | null
 }
 
 export type InvoiceCountAggregateOutputType = {
@@ -105,25 +97,17 @@ export type InvoiceCountAggregateOutputType = {
 
 
 export type InvoiceAvgAggregateInputType = {
-  id?: true
   subtotal?: true
   tax?: true
   withholdingTax?: true
   total?: true
-  workspaceId?: true
-  customerId?: true
-  caseId?: true
 }
 
 export type InvoiceSumAggregateInputType = {
-  id?: true
   subtotal?: true
   tax?: true
   withholdingTax?: true
   total?: true
-  workspaceId?: true
-  customerId?: true
-  caseId?: true
 }
 
 export type InvoiceMinAggregateInputType = {
@@ -268,7 +252,7 @@ export type InvoiceGroupByArgs<ExtArgs extends runtime.Types.Extensions.Internal
 }
 
 export type InvoiceGroupByOutputType = {
-  id: number
+  id: string
   number: string
   subtotal: number
   tax: number
@@ -280,9 +264,9 @@ export type InvoiceGroupByOutputType = {
   description: string | null
   createdAt: Date
   updatedAt: Date
-  workspaceId: number
-  customerId: number
-  caseId: number
+  workspaceId: string
+  customerId: string
+  caseId: string
   _count: InvoiceCountAggregateOutputType | null
   _avg: InvoiceAvgAggregateOutputType | null
   _sum: InvoiceSumAggregateOutputType | null
@@ -309,7 +293,7 @@ export type InvoiceWhereInput = {
   AND?: Prisma.InvoiceWhereInput | Prisma.InvoiceWhereInput[]
   OR?: Prisma.InvoiceWhereInput[]
   NOT?: Prisma.InvoiceWhereInput | Prisma.InvoiceWhereInput[]
-  id?: Prisma.IntFilter<"Invoice"> | number
+  id?: Prisma.StringFilter<"Invoice"> | string
   number?: Prisma.StringFilter<"Invoice"> | string
   subtotal?: Prisma.IntFilter<"Invoice"> | number
   tax?: Prisma.IntFilter<"Invoice"> | number
@@ -321,9 +305,9 @@ export type InvoiceWhereInput = {
   description?: Prisma.StringNullableFilter<"Invoice"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Invoice"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Invoice"> | Date | string
-  workspaceId?: Prisma.IntFilter<"Invoice"> | number
-  customerId?: Prisma.IntFilter<"Invoice"> | number
-  caseId?: Prisma.IntFilter<"Invoice"> | number
+  workspaceId?: Prisma.StringFilter<"Invoice"> | string
+  customerId?: Prisma.StringFilter<"Invoice"> | string
+  caseId?: Prisma.StringFilter<"Invoice"> | string
   workspace?: Prisma.XOR<Prisma.WorkspaceScalarRelationFilter, Prisma.WorkspaceWhereInput>
   customer?: Prisma.XOR<Prisma.CustomerScalarRelationFilter, Prisma.CustomerWhereInput>
   case?: Prisma.XOR<Prisma.CaseScalarRelationFilter, Prisma.CaseWhereInput>
@@ -353,7 +337,7 @@ export type InvoiceOrderByWithRelationInput = {
 }
 
 export type InvoiceWhereUniqueInput = Prisma.AtLeast<{
-  id?: number
+  id?: string
   AND?: Prisma.InvoiceWhereInput | Prisma.InvoiceWhereInput[]
   OR?: Prisma.InvoiceWhereInput[]
   NOT?: Prisma.InvoiceWhereInput | Prisma.InvoiceWhereInput[]
@@ -368,9 +352,9 @@ export type InvoiceWhereUniqueInput = Prisma.AtLeast<{
   description?: Prisma.StringNullableFilter<"Invoice"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Invoice"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Invoice"> | Date | string
-  workspaceId?: Prisma.IntFilter<"Invoice"> | number
-  customerId?: Prisma.IntFilter<"Invoice"> | number
-  caseId?: Prisma.IntFilter<"Invoice"> | number
+  workspaceId?: Prisma.StringFilter<"Invoice"> | string
+  customerId?: Prisma.StringFilter<"Invoice"> | string
+  caseId?: Prisma.StringFilter<"Invoice"> | string
   workspace?: Prisma.XOR<Prisma.WorkspaceScalarRelationFilter, Prisma.WorkspaceWhereInput>
   customer?: Prisma.XOR<Prisma.CustomerScalarRelationFilter, Prisma.CustomerWhereInput>
   case?: Prisma.XOR<Prisma.CaseScalarRelationFilter, Prisma.CaseWhereInput>
@@ -404,7 +388,7 @@ export type InvoiceScalarWhereWithAggregatesInput = {
   AND?: Prisma.InvoiceScalarWhereWithAggregatesInput | Prisma.InvoiceScalarWhereWithAggregatesInput[]
   OR?: Prisma.InvoiceScalarWhereWithAggregatesInput[]
   NOT?: Prisma.InvoiceScalarWhereWithAggregatesInput | Prisma.InvoiceScalarWhereWithAggregatesInput[]
-  id?: Prisma.IntWithAggregatesFilter<"Invoice"> | number
+  id?: Prisma.StringWithAggregatesFilter<"Invoice"> | string
   number?: Prisma.StringWithAggregatesFilter<"Invoice"> | string
   subtotal?: Prisma.IntWithAggregatesFilter<"Invoice"> | number
   tax?: Prisma.IntWithAggregatesFilter<"Invoice"> | number
@@ -416,12 +400,13 @@ export type InvoiceScalarWhereWithAggregatesInput = {
   description?: Prisma.StringNullableWithAggregatesFilter<"Invoice"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Invoice"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Invoice"> | Date | string
-  workspaceId?: Prisma.IntWithAggregatesFilter<"Invoice"> | number
-  customerId?: Prisma.IntWithAggregatesFilter<"Invoice"> | number
-  caseId?: Prisma.IntWithAggregatesFilter<"Invoice"> | number
+  workspaceId?: Prisma.StringWithAggregatesFilter<"Invoice"> | string
+  customerId?: Prisma.StringWithAggregatesFilter<"Invoice"> | string
+  caseId?: Prisma.StringWithAggregatesFilter<"Invoice"> | string
 }
 
 export type InvoiceCreateInput = {
+  id?: string
   number: string
   subtotal: number
   tax: number
@@ -440,7 +425,7 @@ export type InvoiceCreateInput = {
 }
 
 export type InvoiceUncheckedCreateInput = {
-  id?: number
+  id?: string
   number: string
   subtotal: number
   tax: number
@@ -452,13 +437,14 @@ export type InvoiceUncheckedCreateInput = {
   description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  workspaceId: number
-  customerId: number
-  caseId: number
+  workspaceId: string
+  customerId: string
+  caseId: string
   lineItems?: Prisma.LineItemUncheckedCreateNestedManyWithoutInvoiceInput
 }
 
 export type InvoiceUpdateInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   number?: Prisma.StringFieldUpdateOperationsInput | string
   subtotal?: Prisma.IntFieldUpdateOperationsInput | number
   tax?: Prisma.IntFieldUpdateOperationsInput | number
@@ -477,7 +463,7 @@ export type InvoiceUpdateInput = {
 }
 
 export type InvoiceUncheckedUpdateInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   number?: Prisma.StringFieldUpdateOperationsInput | string
   subtotal?: Prisma.IntFieldUpdateOperationsInput | number
   tax?: Prisma.IntFieldUpdateOperationsInput | number
@@ -489,14 +475,14 @@ export type InvoiceUncheckedUpdateInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  workspaceId?: Prisma.IntFieldUpdateOperationsInput | number
-  customerId?: Prisma.IntFieldUpdateOperationsInput | number
-  caseId?: Prisma.IntFieldUpdateOperationsInput | number
+  workspaceId?: Prisma.StringFieldUpdateOperationsInput | string
+  customerId?: Prisma.StringFieldUpdateOperationsInput | string
+  caseId?: Prisma.StringFieldUpdateOperationsInput | string
   lineItems?: Prisma.LineItemUncheckedUpdateManyWithoutInvoiceNestedInput
 }
 
 export type InvoiceCreateManyInput = {
-  id?: number
+  id?: string
   number: string
   subtotal: number
   tax: number
@@ -508,12 +494,13 @@ export type InvoiceCreateManyInput = {
   description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  workspaceId: number
-  customerId: number
-  caseId: number
+  workspaceId: string
+  customerId: string
+  caseId: string
 }
 
 export type InvoiceUpdateManyMutationInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   number?: Prisma.StringFieldUpdateOperationsInput | string
   subtotal?: Prisma.IntFieldUpdateOperationsInput | number
   tax?: Prisma.IntFieldUpdateOperationsInput | number
@@ -528,7 +515,7 @@ export type InvoiceUpdateManyMutationInput = {
 }
 
 export type InvoiceUncheckedUpdateManyInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   number?: Prisma.StringFieldUpdateOperationsInput | string
   subtotal?: Prisma.IntFieldUpdateOperationsInput | number
   tax?: Prisma.IntFieldUpdateOperationsInput | number
@@ -540,9 +527,9 @@ export type InvoiceUncheckedUpdateManyInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  workspaceId?: Prisma.IntFieldUpdateOperationsInput | number
-  customerId?: Prisma.IntFieldUpdateOperationsInput | number
-  caseId?: Prisma.IntFieldUpdateOperationsInput | number
+  workspaceId?: Prisma.StringFieldUpdateOperationsInput | string
+  customerId?: Prisma.StringFieldUpdateOperationsInput | string
+  caseId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type InvoiceListRelationFilter = {
@@ -574,14 +561,10 @@ export type InvoiceCountOrderByAggregateInput = {
 }
 
 export type InvoiceAvgOrderByAggregateInput = {
-  id?: Prisma.SortOrder
   subtotal?: Prisma.SortOrder
   tax?: Prisma.SortOrder
   withholdingTax?: Prisma.SortOrder
   total?: Prisma.SortOrder
-  workspaceId?: Prisma.SortOrder
-  customerId?: Prisma.SortOrder
-  caseId?: Prisma.SortOrder
 }
 
 export type InvoiceMaxOrderByAggregateInput = {
@@ -621,14 +604,10 @@ export type InvoiceMinOrderByAggregateInput = {
 }
 
 export type InvoiceSumOrderByAggregateInput = {
-  id?: Prisma.SortOrder
   subtotal?: Prisma.SortOrder
   tax?: Prisma.SortOrder
   withholdingTax?: Prisma.SortOrder
   total?: Prisma.SortOrder
-  workspaceId?: Prisma.SortOrder
-  customerId?: Prisma.SortOrder
-  caseId?: Prisma.SortOrder
 }
 
 export type InvoiceScalarRelationFilter = {
@@ -781,6 +760,7 @@ export type InvoiceUpdateOneRequiredWithoutLineItemsNestedInput = {
 }
 
 export type InvoiceCreateWithoutWorkspaceInput = {
+  id?: string
   number: string
   subtotal: number
   tax: number
@@ -798,7 +778,7 @@ export type InvoiceCreateWithoutWorkspaceInput = {
 }
 
 export type InvoiceUncheckedCreateWithoutWorkspaceInput = {
-  id?: number
+  id?: string
   number: string
   subtotal: number
   tax: number
@@ -810,8 +790,8 @@ export type InvoiceUncheckedCreateWithoutWorkspaceInput = {
   description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  customerId: number
-  caseId: number
+  customerId: string
+  caseId: string
   lineItems?: Prisma.LineItemUncheckedCreateNestedManyWithoutInvoiceInput
 }
 
@@ -845,7 +825,7 @@ export type InvoiceScalarWhereInput = {
   AND?: Prisma.InvoiceScalarWhereInput | Prisma.InvoiceScalarWhereInput[]
   OR?: Prisma.InvoiceScalarWhereInput[]
   NOT?: Prisma.InvoiceScalarWhereInput | Prisma.InvoiceScalarWhereInput[]
-  id?: Prisma.IntFilter<"Invoice"> | number
+  id?: Prisma.StringFilter<"Invoice"> | string
   number?: Prisma.StringFilter<"Invoice"> | string
   subtotal?: Prisma.IntFilter<"Invoice"> | number
   tax?: Prisma.IntFilter<"Invoice"> | number
@@ -857,12 +837,13 @@ export type InvoiceScalarWhereInput = {
   description?: Prisma.StringNullableFilter<"Invoice"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Invoice"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Invoice"> | Date | string
-  workspaceId?: Prisma.IntFilter<"Invoice"> | number
-  customerId?: Prisma.IntFilter<"Invoice"> | number
-  caseId?: Prisma.IntFilter<"Invoice"> | number
+  workspaceId?: Prisma.StringFilter<"Invoice"> | string
+  customerId?: Prisma.StringFilter<"Invoice"> | string
+  caseId?: Prisma.StringFilter<"Invoice"> | string
 }
 
 export type InvoiceCreateWithoutCustomerInput = {
+  id?: string
   number: string
   subtotal: number
   tax: number
@@ -880,7 +861,7 @@ export type InvoiceCreateWithoutCustomerInput = {
 }
 
 export type InvoiceUncheckedCreateWithoutCustomerInput = {
-  id?: number
+  id?: string
   number: string
   subtotal: number
   tax: number
@@ -892,8 +873,8 @@ export type InvoiceUncheckedCreateWithoutCustomerInput = {
   description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  workspaceId: number
-  caseId: number
+  workspaceId: string
+  caseId: string
   lineItems?: Prisma.LineItemUncheckedCreateNestedManyWithoutInvoiceInput
 }
 
@@ -924,6 +905,7 @@ export type InvoiceUpdateManyWithWhereWithoutCustomerInput = {
 }
 
 export type InvoiceCreateWithoutCaseInput = {
+  id?: string
   number: string
   subtotal: number
   tax: number
@@ -941,7 +923,7 @@ export type InvoiceCreateWithoutCaseInput = {
 }
 
 export type InvoiceUncheckedCreateWithoutCaseInput = {
-  id?: number
+  id?: string
   number: string
   subtotal: number
   tax: number
@@ -953,8 +935,8 @@ export type InvoiceUncheckedCreateWithoutCaseInput = {
   description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  workspaceId: number
-  customerId: number
+  workspaceId: string
+  customerId: string
   lineItems?: Prisma.LineItemUncheckedCreateNestedManyWithoutInvoiceInput
 }
 
@@ -985,6 +967,7 @@ export type InvoiceUpdateManyWithWhereWithoutCaseInput = {
 }
 
 export type InvoiceCreateWithoutLineItemsInput = {
+  id?: string
   number: string
   subtotal: number
   tax: number
@@ -1002,7 +985,7 @@ export type InvoiceCreateWithoutLineItemsInput = {
 }
 
 export type InvoiceUncheckedCreateWithoutLineItemsInput = {
-  id?: number
+  id?: string
   number: string
   subtotal: number
   tax: number
@@ -1014,9 +997,9 @@ export type InvoiceUncheckedCreateWithoutLineItemsInput = {
   description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  workspaceId: number
-  customerId: number
-  caseId: number
+  workspaceId: string
+  customerId: string
+  caseId: string
 }
 
 export type InvoiceCreateOrConnectWithoutLineItemsInput = {
@@ -1036,6 +1019,7 @@ export type InvoiceUpdateToOneWithWhereWithoutLineItemsInput = {
 }
 
 export type InvoiceUpdateWithoutLineItemsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   number?: Prisma.StringFieldUpdateOperationsInput | string
   subtotal?: Prisma.IntFieldUpdateOperationsInput | number
   tax?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1053,7 +1037,7 @@ export type InvoiceUpdateWithoutLineItemsInput = {
 }
 
 export type InvoiceUncheckedUpdateWithoutLineItemsInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   number?: Prisma.StringFieldUpdateOperationsInput | string
   subtotal?: Prisma.IntFieldUpdateOperationsInput | number
   tax?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1065,13 +1049,13 @@ export type InvoiceUncheckedUpdateWithoutLineItemsInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  workspaceId?: Prisma.IntFieldUpdateOperationsInput | number
-  customerId?: Prisma.IntFieldUpdateOperationsInput | number
-  caseId?: Prisma.IntFieldUpdateOperationsInput | number
+  workspaceId?: Prisma.StringFieldUpdateOperationsInput | string
+  customerId?: Prisma.StringFieldUpdateOperationsInput | string
+  caseId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type InvoiceCreateManyWorkspaceInput = {
-  id?: number
+  id?: string
   number: string
   subtotal: number
   tax: number
@@ -1083,11 +1067,12 @@ export type InvoiceCreateManyWorkspaceInput = {
   description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  customerId: number
-  caseId: number
+  customerId: string
+  caseId: string
 }
 
 export type InvoiceUpdateWithoutWorkspaceInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   number?: Prisma.StringFieldUpdateOperationsInput | string
   subtotal?: Prisma.IntFieldUpdateOperationsInput | number
   tax?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1105,7 +1090,7 @@ export type InvoiceUpdateWithoutWorkspaceInput = {
 }
 
 export type InvoiceUncheckedUpdateWithoutWorkspaceInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   number?: Prisma.StringFieldUpdateOperationsInput | string
   subtotal?: Prisma.IntFieldUpdateOperationsInput | number
   tax?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1117,13 +1102,13 @@ export type InvoiceUncheckedUpdateWithoutWorkspaceInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  customerId?: Prisma.IntFieldUpdateOperationsInput | number
-  caseId?: Prisma.IntFieldUpdateOperationsInput | number
+  customerId?: Prisma.StringFieldUpdateOperationsInput | string
+  caseId?: Prisma.StringFieldUpdateOperationsInput | string
   lineItems?: Prisma.LineItemUncheckedUpdateManyWithoutInvoiceNestedInput
 }
 
 export type InvoiceUncheckedUpdateManyWithoutWorkspaceInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   number?: Prisma.StringFieldUpdateOperationsInput | string
   subtotal?: Prisma.IntFieldUpdateOperationsInput | number
   tax?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1135,12 +1120,12 @@ export type InvoiceUncheckedUpdateManyWithoutWorkspaceInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  customerId?: Prisma.IntFieldUpdateOperationsInput | number
-  caseId?: Prisma.IntFieldUpdateOperationsInput | number
+  customerId?: Prisma.StringFieldUpdateOperationsInput | string
+  caseId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type InvoiceCreateManyCustomerInput = {
-  id?: number
+  id?: string
   number: string
   subtotal: number
   tax: number
@@ -1152,11 +1137,12 @@ export type InvoiceCreateManyCustomerInput = {
   description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  workspaceId: number
-  caseId: number
+  workspaceId: string
+  caseId: string
 }
 
 export type InvoiceUpdateWithoutCustomerInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   number?: Prisma.StringFieldUpdateOperationsInput | string
   subtotal?: Prisma.IntFieldUpdateOperationsInput | number
   tax?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1174,7 +1160,7 @@ export type InvoiceUpdateWithoutCustomerInput = {
 }
 
 export type InvoiceUncheckedUpdateWithoutCustomerInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   number?: Prisma.StringFieldUpdateOperationsInput | string
   subtotal?: Prisma.IntFieldUpdateOperationsInput | number
   tax?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1186,13 +1172,13 @@ export type InvoiceUncheckedUpdateWithoutCustomerInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  workspaceId?: Prisma.IntFieldUpdateOperationsInput | number
-  caseId?: Prisma.IntFieldUpdateOperationsInput | number
+  workspaceId?: Prisma.StringFieldUpdateOperationsInput | string
+  caseId?: Prisma.StringFieldUpdateOperationsInput | string
   lineItems?: Prisma.LineItemUncheckedUpdateManyWithoutInvoiceNestedInput
 }
 
 export type InvoiceUncheckedUpdateManyWithoutCustomerInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   number?: Prisma.StringFieldUpdateOperationsInput | string
   subtotal?: Prisma.IntFieldUpdateOperationsInput | number
   tax?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1204,12 +1190,12 @@ export type InvoiceUncheckedUpdateManyWithoutCustomerInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  workspaceId?: Prisma.IntFieldUpdateOperationsInput | number
-  caseId?: Prisma.IntFieldUpdateOperationsInput | number
+  workspaceId?: Prisma.StringFieldUpdateOperationsInput | string
+  caseId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type InvoiceCreateManyCaseInput = {
-  id?: number
+  id?: string
   number: string
   subtotal: number
   tax: number
@@ -1221,11 +1207,12 @@ export type InvoiceCreateManyCaseInput = {
   description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  workspaceId: number
-  customerId: number
+  workspaceId: string
+  customerId: string
 }
 
 export type InvoiceUpdateWithoutCaseInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   number?: Prisma.StringFieldUpdateOperationsInput | string
   subtotal?: Prisma.IntFieldUpdateOperationsInput | number
   tax?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1243,7 +1230,7 @@ export type InvoiceUpdateWithoutCaseInput = {
 }
 
 export type InvoiceUncheckedUpdateWithoutCaseInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   number?: Prisma.StringFieldUpdateOperationsInput | string
   subtotal?: Prisma.IntFieldUpdateOperationsInput | number
   tax?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1255,13 +1242,13 @@ export type InvoiceUncheckedUpdateWithoutCaseInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  workspaceId?: Prisma.IntFieldUpdateOperationsInput | number
-  customerId?: Prisma.IntFieldUpdateOperationsInput | number
+  workspaceId?: Prisma.StringFieldUpdateOperationsInput | string
+  customerId?: Prisma.StringFieldUpdateOperationsInput | string
   lineItems?: Prisma.LineItemUncheckedUpdateManyWithoutInvoiceNestedInput
 }
 
 export type InvoiceUncheckedUpdateManyWithoutCaseInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   number?: Prisma.StringFieldUpdateOperationsInput | string
   subtotal?: Prisma.IntFieldUpdateOperationsInput | number
   tax?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1273,8 +1260,8 @@ export type InvoiceUncheckedUpdateManyWithoutCaseInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  workspaceId?: Prisma.IntFieldUpdateOperationsInput | number
-  customerId?: Prisma.IntFieldUpdateOperationsInput | number
+  workspaceId?: Prisma.StringFieldUpdateOperationsInput | string
+  customerId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 
@@ -1419,7 +1406,7 @@ export type $InvoicePayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     lineItems: Prisma.$LineItemPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
-    id: number
+    id: string
     number: string
     subtotal: number
     tax: number
@@ -1431,9 +1418,9 @@ export type $InvoicePayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     description: string | null
     createdAt: Date
     updatedAt: Date
-    workspaceId: number
-    customerId: number
-    caseId: number
+    workspaceId: string
+    customerId: string
+    caseId: string
   }, ExtArgs["result"]["invoice"]>
   composites: {}
 }
@@ -1861,7 +1848,7 @@ export interface Prisma__InvoiceClient<T, Null = never, ExtArgs extends runtime.
  * Fields of the Invoice model
  */
 export interface InvoiceFieldRefs {
-  readonly id: Prisma.FieldRef<"Invoice", 'Int'>
+  readonly id: Prisma.FieldRef<"Invoice", 'String'>
   readonly number: Prisma.FieldRef<"Invoice", 'String'>
   readonly subtotal: Prisma.FieldRef<"Invoice", 'Int'>
   readonly tax: Prisma.FieldRef<"Invoice", 'Int'>
@@ -1873,9 +1860,9 @@ export interface InvoiceFieldRefs {
   readonly description: Prisma.FieldRef<"Invoice", 'String'>
   readonly createdAt: Prisma.FieldRef<"Invoice", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Invoice", 'DateTime'>
-  readonly workspaceId: Prisma.FieldRef<"Invoice", 'Int'>
-  readonly customerId: Prisma.FieldRef<"Invoice", 'Int'>
-  readonly caseId: Prisma.FieldRef<"Invoice", 'Int'>
+  readonly workspaceId: Prisma.FieldRef<"Invoice", 'String'>
+  readonly customerId: Prisma.FieldRef<"Invoice", 'String'>
+  readonly caseId: Prisma.FieldRef<"Invoice", 'String'>
 }
     
 

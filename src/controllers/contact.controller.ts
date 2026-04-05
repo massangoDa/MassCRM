@@ -27,10 +27,7 @@ export const createContactController = async (req: Request, res: Response) => {
 
 export const getContactsController = async (req: Request, res: Response) => {
     try {
-        const customerId = req.query.customerId ? Number(req.query.customerId) : undefined
-        if (customerId !== undefined && isNaN(customerId)) {
-            return res.status(400).json({ message: "無効なIDです" })
-        }
+        const customerId = typeof req.query.customerId === 'string' ? req.query.customerId : undefined
         const result = await getContactsService(req.user!.workspaceId, customerId)
 
         res.status(200).json(result)
@@ -44,8 +41,8 @@ export const getContactsController = async (req: Request, res: Response) => {
 
 export const getContactController = async (req: Request, res: Response) => {
     try {
-        const id = Number(req.params.id)
-        if (isNaN(id)) {
+        const id = req.params.id as string
+        if (!id) {
             return res.status(400).json({ message: "無効なIDです" })
         }
 
@@ -62,8 +59,8 @@ export const getContactController = async (req: Request, res: Response) => {
 
 export const updateContactController = async (req: Request, res: Response) => {
     try {
-        const id = Number(req.params.id)
-        if (isNaN(id)) {
+        const id = req.params.id as string
+        if (!id) {
             return res.status(400).json({ message: "無効なIDです" })
         }
 
@@ -85,8 +82,8 @@ export const updateContactController = async (req: Request, res: Response) => {
 
 export const deleteContactController = async (req: Request, res: Response) => {
     try {
-        const id = Number(req.params.id)
-        if (isNaN(id)) {
+        const id = req.params.id as string
+        if (!id) {
             return res.status(400).json({ message: "無効なIDです" })
         }
 

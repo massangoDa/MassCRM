@@ -40,8 +40,8 @@ export const getCustomersController = async (req: Request, res: Response) => {
 
 export const getCustomerController = async (req: Request, res: Response) => {
     try {
-        const id = Number(req.params.id)
-        if (isNaN(id)) {
+        const id = req.params.id as string
+        if (!id) {
             return res.status(400).json({ message: "無効なIDです" })
         }
 
@@ -58,8 +58,8 @@ export const getCustomerController = async (req: Request, res: Response) => {
 
 export const updateCustomerController = async (req: Request, res: Response) => {
     try {
-        const id = Number(req.params.id)
-        if (isNaN(id)) {
+        const id = req.params.id as string
+        if (!id) {
             return res.status(400).json({ message: "無効なIDです" })
         }
 
@@ -81,8 +81,8 @@ export const updateCustomerController = async (req: Request, res: Response) => {
 
 export const deleteCustomerController = async (req: Request, res: Response) => {
     try {
-        const id = Number(req.params.id)
-        if (isNaN(id)) {
+        const id = req.params.id as string
+        if (!id) {
             return res.status(400).json({ message: "無効なIDです" })
         }
 

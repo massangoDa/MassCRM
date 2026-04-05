@@ -27,10 +27,7 @@ export const createInvoiceController = async (req: Request, res: Response) => {
 
 export const getInvoicesController = async (req: Request, res: Response) => {
     try {
-        const caseId = req.query.caseId ? Number(req.query.caseId) : undefined
-        if (caseId !== undefined && isNaN(caseId)) {
-            return res.status(400).json({ message: "無効なIDです" })
-        }
+        const caseId = typeof req.query.caseId === 'string' ? req.query.caseId : undefined
         const result = await getInvoicesService(req.user!.workspaceId, caseId)
 
         res.status(200).json(result)
@@ -44,8 +41,8 @@ export const getInvoicesController = async (req: Request, res: Response) => {
 
 export const getInvoiceController = async (req: Request, res: Response) => {
     try {
-        const id = Number(req.params.id)
-        if (isNaN(id)) {
+        const id = req.params.id as string
+        if (!id) {
             return res.status(400).json({ message: "無効なIDです" })
         }
 
@@ -62,8 +59,8 @@ export const getInvoiceController = async (req: Request, res: Response) => {
 
 export const updateInvoiceController = async (req: Request, res: Response) => {
     try {
-        const id = Number(req.params.id)
-        if (isNaN(id)) {
+        const id = req.params.id as string
+        if (!id) {
             return res.status(400).json({ message: "無効なIDです" })
         }
 
@@ -85,8 +82,8 @@ export const updateInvoiceController = async (req: Request, res: Response) => {
 
 export const deleteInvoiceController = async (req: Request, res: Response) => {
     try {
-        const id = Number(req.params.id)
-        if (isNaN(id)) {
+        const id = req.params.id as string
+        if (!id) {
             return res.status(400).json({ message: "無効なIDです" })
         }
 

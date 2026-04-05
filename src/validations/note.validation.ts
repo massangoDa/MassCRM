@@ -2,7 +2,7 @@ import { z } from 'zod'
 
 export const CreateNoteSchema = z.object({
     content: z.string().min(1),
-    customerId: z.number().optional()
+    customerId: z.string().optional()
 })
 
 export const UpdateNoteSchema = z.object({

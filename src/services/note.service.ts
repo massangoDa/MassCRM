@@ -1,7 +1,7 @@
 import {prisma} from "../lib/prisma";
 import {CreateNoteInput, UpdateNoteInput} from "../validations/note.validation";
 
-export const createNoteService = async (input: CreateNoteInput, workspaceId: number) => {
+export const createNoteService = async (input: CreateNoteInput, workspaceId: string) => {
     const result = await prisma.note.create({
         data: {
             ...input,
@@ -12,7 +12,7 @@ export const createNoteService = async (input: CreateNoteInput, workspaceId: num
     return result
 }
 
-export const getNotesService = async (workspaceId: number, customerId?: number) => {
+export const getNotesService = async (workspaceId: string, customerId?: string) => {
     const result = await prisma.note.findMany({
         where: {
             workspaceId,
@@ -23,7 +23,7 @@ export const getNotesService = async (workspaceId: number, customerId?: number) 
     return result
 }
 
-export const getNoteService = async (workspaceId: number, id: number) => {
+export const getNoteService = async (workspaceId: string, id: string) => {
     const result = await prisma.note.findUnique({
         where: {
             workspaceId,
@@ -34,7 +34,7 @@ export const getNoteService = async (workspaceId: number, id: number) => {
     return result
 }
 
-export const updateNoteService = async (input: UpdateNoteInput, workspaceId: number, id: number) => {
+export const updateNoteService = async (input: UpdateNoteInput, workspaceId: string, id: string) => {
     const result = await prisma.note.update({
         where: {
             workspaceId,
@@ -46,7 +46,7 @@ export const updateNoteService = async (input: UpdateNoteInput, workspaceId: num
     return result
 }
 
-export const deleteNoteService = async (workspaceId: number, id: number) => {
+export const deleteNoteService = async (workspaceId: string, id: string) => {
     const result = await prisma.note.delete({
         where: {
             workspaceId,
