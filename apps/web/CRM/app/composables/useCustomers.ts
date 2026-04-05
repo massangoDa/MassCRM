@@ -1,60 +1,59 @@
-import type {CreateCustomerInput, UpdateCustomerInput} from "~/schemas/customer.validation";
+import type {CreateCustomerInput, Customer, UpdateCustomerInput} from "~/schemas/customer.validation";
 
-export const useCustomers = () => {
+const useCustomers = () => {
   const api = useApi()
 
   const createCustomer = async (data: CreateCustomerInput) => {
-    try {
-      return await api('/customers', {
-        method: 'POST',
-        body: data
-      })
-    } catch (err) {
-      throw err
-    }
+    return await api('/customers', {
+      method: 'POST',
+      body: data
+    })
   }
 
   const getCustomers = async () => {
-    try {
-      return await api('/customers', {
-        method: 'GET'
-      })
-    } catch (err) {
-      throw err
-    }
+    return await api<Customer[]>('/customers', {
+      method: 'GET'
+    })
   }
 
   const getCustomer = async (id: number) => {
-    try {
-      return await api(`/customers/${id}`, {
-        method: 'GET'
-      })
-    } catch (err) {
-      throw err
-    }
+    return await api(`/customers/${id}`, {
+      method: 'GET'
+    })
   }
 
   const updateCustomer = async (data: UpdateCustomerInput, id: number) => {
-    try {
-      return await api(`/customers/${id}`, {
-        method: 'PATCH',
-        body: data
-      })
-    } catch (err) {
-      throw err
-    }
+    return await api(`/customers/${id}`, {
+      method: 'PATCH',
+      body: data
+    })
   }
 
   const deleteCustomer = async (id: number) => {
-    try {
-      return await api(`/customers/${id}`, {
-        method: 'DELETE'
-      })
-    } catch (err) {
-      throw err
-    }
+    return await api(`/customers/${id}`, {
+      method: 'DELETE'
+    })
   }
 
   return { createCustomer, getCustomers, getCustomer, updateCustomer, deleteCustomer }
 }
 
+export const useCustomersQuery = () => {
+  const { getCustomers, createCustomer } = useCustomers()
+  const queryClient = useQueryClient()
+
+  const customersQuery = useQuery({
+    queryKey: ['customers'],
+    queryFn: getCustomers,
+    initialData: []
+  })
+
+  const createCustomerMutation = useMutation({
+    mutationFn: createCustomer,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: [ 'customers' ] })
+    }
+  })
+
+  return { customersQuery, createCustomerMutation }
+}

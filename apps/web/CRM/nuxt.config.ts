@@ -4,7 +4,8 @@ export default defineNuxtConfig({
     '@nuxt/eslint',
     '@nuxt/ui',
     '@vueuse/nuxt',
-    'nuxt-toast'
+    'nuxt-toast',
+    '@peterbud/nuxt-query'
   ],
 
   devtools: {
@@ -27,6 +28,18 @@ export default defineNuxtConfig({
       stylistic: {
         commaDangle: 'never',
         braceStyle: '1tbs'
+      }
+    }
+  },
+
+  nuxtQuery: {
+    autoImports: ['useQuery', 'useMutation', 'useQueryClient'],
+    devtools: true,
+    queryClientOptions: {
+      defaultOptions: {
+        queries: {
+          refetchOnWindowFocus: false
+        }
       }
     }
   }

@@ -22,5 +22,20 @@ export const UpdateCustomerSchema = z.object({
     description: z.string().optional()
 })
 
+export const CustomerSchema = z.object({
+  id: z.number(),
+  name: z.string(),
+  category: z.string().nullable(),
+  status: z.string().nullable(),
+  email: z.string().nullable(),
+  phone: z.string().nullable(),
+  address: z.string().nullable(),
+  website: z.string().nullable(),
+  description: z.string().nullable(),
+  createdAt: z.string(),
+  updatedAt: z.string()
+})
+
 export type CreateCustomerInput = z.infer<typeof CreateCustomerSchema>
 export type UpdateCustomerInput = z.infer<typeof UpdateCustomerSchema>
+export type Customer = z.infer<typeof CustomerSchema>

@@ -55,7 +55,15 @@ const items = computed<DropdownMenuItem[][]>(() => ([[{
   }]
 }], [{
   label: 'Log out',
-  icon: 'i-lucide-log-out'
+  icon: 'i-lucide-log-out',
+  onSelect(e: Event) {
+    e.preventDefault()
+
+
+    // useAuth側でやれ
+    const cookie = useCookie('token')
+    cookie.value = null
+  }
 }]]))
 </script>
 

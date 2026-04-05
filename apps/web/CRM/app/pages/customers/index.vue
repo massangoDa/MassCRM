@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import AddModal from "~/components/shared/AddModal.vue";
-import {type CreateCustomerInput, CreateCustomerSchema} from "~/schemas/customer.validation";
+import {type CreateCustomerInput, CreateCustomerSchema, type Customer} from "~/schemas/customer.validation";
 import type {FormType} from "~/schemas/form.validation";
+import type {TableColumn} from "@nuxt/ui/components/Table.vue";
+import {row} from "@unovis/ts/components/timeline/style";
 
 const toast = useToast()
-const { createCustomer, getCustomers } = useCustomers()
+const { customersQuery, createCustomerMutation } = useCustomersQuery()
 
-const customers = ref<any[]>([])
 const globalFilter = ref('')
 
 const formField = [
@@ -72,21 +73,53 @@ const formField = [
     label: '備考・メモ',
     type: 'textarea',
     placeholder: '会社の説明や備考を入力',
-  },
+  }
 ] satisfies FormType[]
+
+const columns: TableColumn<Customer>[] = [
+  {
+    accessorKey: 'id',
+    header: 'ID'
+  },
+  {
+    accessorKey: 'name',
+    header: '取引先・氏名',
+    cell: ({ row }) => {
+      return h(resolveComponent('NuxtLink'), {
+        to: `/customers/${row.original.id}`
+      }, () => row.original.name)
+    }
+  },
+  {
+    accessorKey: 'category',
+    header: '属性',
+  },
+  {
+    accessorKey: 'status',
+    header: '状況',
+  },
+  {
+    accessorKey: 'email',
+    header: 'メールアドレス',
+  },
+  {
+    accessorKey: 'phone',
+    header: '電話番号',
+  },
+  {
+    accessorKey: 'website',
+    header: 'Webサイト',
+  },
+]
 
 async function handleCreateCustomer(data: CreateCustomerInput) {
   try {
-    await createCustomer(data)
+    await createCustomerMutation.mutateAsync(data)
     toast.success({ title: "顧客の追加に成功", message: "顧客が正常に追加されました" })
   } catch (err: any) {
     toast.error({ title: "顧客の追加に失敗", message: err.message })
   }
 }
-
-onMounted(async () => {
-   customers.value = (await getCustomers()) as any[]
-})
 </script>
 
 <template>
@@ -118,7 +151,8 @@ onMounted(async () => {
         <UTable
           sticky
           ref="table"
-          :data="customers"
+          :data="customersQuery.data.value"
+          :columns="columns"
           v-model:global-filter="globalFilter"
           class="flex-1"
         />
